@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="499c177fc2b6457889840fd942128d9b" Name="Diagram1">
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.airplane" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.archive_flights" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.cities" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.country" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.flights" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.passengers" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.system" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="course_work_WPF_EFModel.tickets" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__archive_f__airpl__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__flights__airplan__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__archive_f__arriv__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__archive_f__depar__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__cities__country___02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__flights__arrival__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__flights__departu__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__tickets__flight___160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="course_work_WPF_EFModel.FK__tickets__id_pass__17036CC0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
