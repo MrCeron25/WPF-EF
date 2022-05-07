@@ -302,4 +302,7 @@ insert into tickets(flight_id, seat_number,[user_id]) values
 select * from users
 select * from system
 select * from tickets
+
+select * from flights
+where flight_name = 'SU 8043'
 */

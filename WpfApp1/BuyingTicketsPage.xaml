@@ -18,6 +18,7 @@
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -92,16 +93,27 @@
                 Name="Search"
                 Click="Search_Click"/>
 
+        <Button Content="Просмотр"
+                Grid.Column="6"
+                Grid.Row="0"
+                IsEnabled="False"
+                Margin="10,10,10,10"
+                FontSize="20"
+                Name="Viewing"
+                Click="Viewing_Click"/>
+
         <ListView Grid.Row="1"
                   Margin="10,10,10,10"
                   x:Name="Tickets"
-                  Grid.ColumnSpan="6">
+                  Grid.ColumnSpan="7" 
+                  SelectionMode="Single"
+                  SelectionChanged="Tickets_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding FlightId}" Header="№ рейса"/>
                     <GridViewColumn DisplayMemberBinding="{Binding FlightName}" Header="Рейс"/>
                     <GridViewColumn DisplayMemberBinding="{Binding DepartureDate, StringFormat='dd.MM.yyyy HH:mm'}" Header="Время отправления"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding TravelTime}" Header="Время в пути"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding TravelTime, StringFormat='HH:mm'}" Header="Время в пути"/>
                     <GridViewColumn DisplayMemberBinding="{Binding ArrivalDate, StringFormat='dd.MM.yyyy HH:mm'}" Header="Время прибытия"/>
                     <GridViewColumn DisplayMemberBinding="{Binding DepartureCity}" Header="Город вылета"/>
                     <GridViewColumn DisplayMemberBinding="{Binding ArrivalCity}" Header="Город прибытия"/>

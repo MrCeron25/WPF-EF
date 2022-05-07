@@ -24,7 +24,6 @@ namespace WpfApp1
             InitializeComponent();
             this.SystemUser = SystemUser;
             end.DisplayDateStart = start.SelectedDate;
-            //Tickets.ItemsSource = Data.GetTickets(SystemUser);
         }
 
         private void Reverse_MouseDown(object sender, MouseEventArgs e)
@@ -36,6 +35,7 @@ namespace WpfApp1
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+            Viewing.IsEnabled = false;
             if (!Tools.CheckStrings(string.IsNullOrEmpty,
                                     from.Text,
                                     to.Text))
@@ -46,7 +46,7 @@ namespace WpfApp1
                     List<Flight> data;
                     if (string.IsNullOrEmpty(end.Text))
                     {
-                        // 2 дата пуста
+                        // пуста
                         data = Data.GetFlights(from.Text,
                                                to.Text,
                                                start.SelectedDate.Value);
@@ -64,6 +64,7 @@ namespace WpfApp1
                         MessageBox.Show("Рейсов не найдено.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     Tickets.ItemsSource = data;
+                    Tickets.SelectedItem = null;
                 }
                 else
                 {
@@ -76,12 +77,45 @@ namespace WpfApp1
             }
         }
 
-        private void start_SelectedDateChanged
-                (object sender, SelectionChangedEventArgs e)
+        private void start_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (end != null)
             {
                 end.DisplayDateStart = start.SelectedDate;
+            }
+        }
+
+        private void Tickets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Tickets.SelectedItem != null)
+            {
+                Viewing.IsEnabled = true;
+            }
+        }
+
+        private void Viewing_Click(object sender, RoutedEventArgs e)
+        {
+            BuyingWindow window = new BuyingWindow(Tickets.SelectedItem as Flight);
+            if ((bool)window.ShowDialog())
+            {
+                long SeatNumber = (long)window.NumberOfSeats.SelectedItem;
+                try
+                {
+                    tickets Newticket = new tickets
+                    {
+                        flight_id = long.Parse(window.FlightId.Text),
+                        seat_number = SeatNumber,
+                        user_id = SystemUser.user_id
+                    };
+                    Manager.Instance.Context.tickets.Add(Newticket);
+                    Manager.Instance.Context.SaveChanges();
+                    Search_Click(null, null); // обновление данных
+                    MessageBox.Show("Вы успешно купили билет.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

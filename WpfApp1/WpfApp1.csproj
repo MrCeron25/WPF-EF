@@ -76,6 +76,9 @@
     <Compile Include="BuyingTicketsPage.xaml.cs">
       <DependentUpon>BuyingTicketsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BuyingWindow.xaml.cs">
+      <DependentUpon>BuyingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="cities.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="BuyingTicketsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BuyingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

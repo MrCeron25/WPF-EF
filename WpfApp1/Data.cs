@@ -152,5 +152,30 @@ namespace WpfApp1
             ).ToList();
             return data;
         }
+
+        private static List<long> GetOccupiedSeats(long FlightId)
+        {
+            List<long> data = (
+                from fl in Manager.Instance.Context.flights
+                join ti in Manager.Instance.Context.tickets on fl.id equals ti.flight_id
+                where fl.id == FlightId
+                select ti.seat_number
+             ).ToList();
+            return data;
+        }
+
+        public static List<long> GetFreeSeats(long FlightId, long numberOfSeat)
+        {
+            List<long> occupiedPlaces = GetOccupiedSeats(FlightId);
+            List<long> res = new List<long>();
+            for (uint i = 1; i <= numberOfSeat; i++)
+            {
+                if (!occupiedPlaces.Contains(i))
+                {
+                    res.Add(i);
+                }
+            }
+            return res;
+        }
     }
 }
