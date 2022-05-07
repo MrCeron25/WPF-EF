@@ -30,8 +30,8 @@ namespace WpfApp1
         public virtual DbSet<cities> cities { get; set; }
         public virtual DbSet<country> country { get; set; }
         public virtual DbSet<flights> flights { get; set; }
-        public virtual DbSet<passengers> passengers { get; set; }
         public virtual DbSet<system> system { get; set; }
         public virtual DbSet<tickets> tickets { get; set; }
+        public virtual DbSet<users> users { get; set; }
     }
 }

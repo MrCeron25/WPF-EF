@@ -33,7 +33,7 @@
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="country_id" Type="bigint" />
+          <Property Name="country_id" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="country">
           <Key>
@@ -56,7 +56,25 @@
           <Property Name="arrival_date" Type="datetime" StoreGeneratedPattern="Computed" />
           <Property Name="price" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="passengers">
+        <EntityType Name="system">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="is_admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tickets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="flight_id" Type="bigint" Nullable="false" />
+          <Property Name="seat_number" Type="bigint" Nullable="false" />
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -68,26 +86,7 @@
           <Property Name="passport_series" Type="int" Nullable="false" />
           <Property Name="passport_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="system">
-          <Key>
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="user_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="login" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="is_admin" Type="bit" Nullable="false" />
-          <Property Name="id_passenger" Type="bigint" />
-        </EntityType>
-        <EntityType Name="tickets">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="flight_id" Type="bigint" Nullable="false" />
-          <Property Name="seat_number" Type="bigint" Nullable="false" />
-          <Property Name="id_passenger" Type="bigint" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__archive_f__airpl__0D7A0286">
+        <Association Name="FK__archive_f__airpl__72910220">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -99,7 +98,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__arriv__0F624AF8">
+        <Association Name="FK__archive_f__arriv__74794A92">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__depar__0E6E26BF">
+        <Association Name="FK__archive_f__depar__73852659">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,8 +122,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cities__country___02FC7413">
-          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+        <Association Name="FK__cities__country___681373AD">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
           <End Role="cities" Type="Self.cities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="country">
@@ -135,7 +134,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__airplan__08B54D69">
+        <Association Name="FK__flights__airplan__6DCC4D03">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,7 +146,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__arrival__0A9D95DB">
+        <Association Name="FK__flights__arrival__6FB49575">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -159,7 +158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__departu__09A971A2">
+        <Association Name="FK__flights__departu__6EC0713C">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -171,10 +170,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6035: В связи "FK__passengers__id__1332DBDC" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
-        <Association Name="FK__passengers__id__1332DBDC" />-->
-        <Association Name="FK__tickets__flight___160F4887">
+        <Association Name="FK__system__user_id__625A9A57">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="system" Type="Self.system" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="system">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tickets__flight___7755B73D">
           <End Role="flights" Type="Self.flights" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,15 +194,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tickets__id_pass__17036CC0">
-          <End Role="passengers" Type="Self.passengers" Multiplicity="1" />
+        <Association Name="FK__tickets__user_id__7849DB76">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="passengers">
+            <Principal Role="users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tickets">
-              <PropertyRef Name="id_passenger" />
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -204,43 +212,47 @@
           <EntitySet Name="cities" EntityType="Self.cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="flights" EntityType="Self.flights" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="passengers" EntityType="Self.passengers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system" EntityType="Self.system" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tickets" EntityType="Self.tickets" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__archive_f__airpl__0D7A0286" Association="Self.FK__archive_f__airpl__0D7A0286">
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__archive_f__airpl__72910220" Association="Self.FK__archive_f__airpl__72910220">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__arriv__0F624AF8" Association="Self.FK__archive_f__arriv__0F624AF8">
+          <AssociationSet Name="FK__archive_f__arriv__74794A92" Association="Self.FK__archive_f__arriv__74794A92">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__depar__0E6E26BF" Association="Self.FK__archive_f__depar__0E6E26BF">
+          <AssociationSet Name="FK__archive_f__depar__73852659" Association="Self.FK__archive_f__depar__73852659">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__cities__country___02FC7413" Association="Self.FK__cities__country___02FC7413">
+          <AssociationSet Name="FK__cities__country___681373AD" Association="Self.FK__cities__country___681373AD">
             <End Role="country" EntitySet="country" />
             <End Role="cities" EntitySet="cities" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__airplan__08B54D69" Association="Self.FK__flights__airplan__08B54D69">
+          <AssociationSet Name="FK__flights__airplan__6DCC4D03" Association="Self.FK__flights__airplan__6DCC4D03">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__arrival__0A9D95DB" Association="Self.FK__flights__arrival__0A9D95DB">
+          <AssociationSet Name="FK__flights__arrival__6FB49575" Association="Self.FK__flights__arrival__6FB49575">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__departu__09A971A2" Association="Self.FK__flights__departu__09A971A2">
+          <AssociationSet Name="FK__flights__departu__6EC0713C" Association="Self.FK__flights__departu__6EC0713C">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__flight___160F4887" Association="Self.FK__tickets__flight___160F4887">
+          <AssociationSet Name="FK__system__user_id__625A9A57" Association="Self.FK__system__user_id__625A9A57">
+            <End Role="users" EntitySet="users" />
+            <End Role="system" EntitySet="system" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tickets__flight___7755B73D" Association="Self.FK__tickets__flight___7755B73D">
             <End Role="flights" EntitySet="flights" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__id_pass__17036CC0" Association="Self.FK__tickets__id_pass__17036CC0">
-            <End Role="passengers" EntitySet="passengers" />
+          <AssociationSet Name="FK__tickets__user_id__7849DB76" Association="Self.FK__tickets__user_id__7849DB76">
+            <End Role="users" EntitySet="users" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
         </EntityContainer>
@@ -256,8 +268,8 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="number_of_seats" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="archive_flights" Relationship="Self.FK__archive_f__airpl__0D7A0286" FromRole="airplane" ToRole="archive_flights" />
-          <NavigationProperty Name="flights" Relationship="Self.FK__flights__airplan__08B54D69" FromRole="airplane" ToRole="flights" />
+          <NavigationProperty Name="archive_flights" Relationship="Self.FK__archive_f__airpl__72910220" FromRole="airplane" ToRole="archive_flights" />
+          <NavigationProperty Name="flights" Relationship="Self.FK__flights__airplan__6DCC4D03" FromRole="airplane" ToRole="flights" />
         </EntityType>
         <EntityType Name="archive_flights">
           <Key>
@@ -272,9 +284,9 @@
           <Property Name="travel_time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="arrival_date" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
           <Property Name="price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="airplane" Relationship="Self.FK__archive_f__airpl__0D7A0286" FromRole="archive_flights" ToRole="airplane" />
-          <NavigationProperty Name="cities" Relationship="Self.FK__archive_f__arriv__0F624AF8" FromRole="archive_flights" ToRole="cities" />
-          <NavigationProperty Name="cities1" Relationship="Self.FK__archive_f__depar__0E6E26BF" FromRole="archive_flights" ToRole="cities" />
+          <NavigationProperty Name="airplane" Relationship="Self.FK__archive_f__airpl__72910220" FromRole="archive_flights" ToRole="airplane" />
+          <NavigationProperty Name="cities" Relationship="Self.FK__archive_f__arriv__74794A92" FromRole="archive_flights" ToRole="cities" />
+          <NavigationProperty Name="cities1" Relationship="Self.FK__archive_f__depar__73852659" FromRole="archive_flights" ToRole="cities" />
         </EntityType>
         <EntityType Name="cities">
           <Key>
@@ -282,12 +294,12 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="country_id" Type="Int64" />
-          <NavigationProperty Name="archive_flights" Relationship="Self.FK__archive_f__arriv__0F624AF8" FromRole="cities" ToRole="archive_flights" />
-          <NavigationProperty Name="archive_flights1" Relationship="Self.FK__archive_f__depar__0E6E26BF" FromRole="cities" ToRole="archive_flights" />
-          <NavigationProperty Name="country" Relationship="Self.FK__cities__country___02FC7413" FromRole="cities" ToRole="country" />
-          <NavigationProperty Name="flights" Relationship="Self.FK__flights__arrival__0A9D95DB" FromRole="cities" ToRole="flights" />
-          <NavigationProperty Name="flights1" Relationship="Self.FK__flights__departu__09A971A2" FromRole="cities" ToRole="flights" />
+          <Property Name="country_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="archive_flights" Relationship="Self.FK__archive_f__arriv__74794A92" FromRole="cities" ToRole="archive_flights" />
+          <NavigationProperty Name="archive_flights1" Relationship="Self.FK__archive_f__depar__73852659" FromRole="cities" ToRole="archive_flights" />
+          <NavigationProperty Name="country" Relationship="Self.FK__cities__country___681373AD" FromRole="cities" ToRole="country" />
+          <NavigationProperty Name="flights" Relationship="Self.FK__flights__arrival__6FB49575" FromRole="cities" ToRole="flights" />
+          <NavigationProperty Name="flights1" Relationship="Self.FK__flights__departu__6EC0713C" FromRole="cities" ToRole="flights" />
         </EntityType>
         <EntityType Name="country">
           <Key>
@@ -295,7 +307,7 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="cities" Relationship="Self.FK__cities__country___02FC7413" FromRole="country" ToRole="cities" />
+          <NavigationProperty Name="cities" Relationship="Self.FK__cities__country___681373AD" FromRole="country" ToRole="cities" />
         </EntityType>
         <EntityType Name="flights">
           <Key>
@@ -310,12 +322,33 @@
           <Property Name="travel_time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="arrival_date" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
           <Property Name="price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="airplane" Relationship="Self.FK__flights__airplan__08B54D69" FromRole="flights" ToRole="airplane" />
-          <NavigationProperty Name="cities" Relationship="Self.FK__flights__arrival__0A9D95DB" FromRole="flights" ToRole="cities" />
-          <NavigationProperty Name="cities1" Relationship="Self.FK__flights__departu__09A971A2" FromRole="flights" ToRole="cities" />
-          <NavigationProperty Name="tickets" Relationship="Self.FK__tickets__flight___160F4887" FromRole="flights" ToRole="tickets" />
+          <NavigationProperty Name="airplane" Relationship="Self.FK__flights__airplan__6DCC4D03" FromRole="flights" ToRole="airplane" />
+          <NavigationProperty Name="cities" Relationship="Self.FK__flights__arrival__6FB49575" FromRole="flights" ToRole="cities" />
+          <NavigationProperty Name="cities1" Relationship="Self.FK__flights__departu__6EC0713C" FromRole="flights" ToRole="cities" />
+          <NavigationProperty Name="tickets" Relationship="Self.FK__tickets__flight___7755B73D" FromRole="flights" ToRole="tickets" />
         </EntityType>
-        <EntityType Name="passengers">
+        <EntityType Name="system">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__system__user_id__625A9A57" FromRole="system" ToRole="users" />
+        </EntityType>
+        <EntityType Name="tickets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="flight_id" Type="Int64" Nullable="false" />
+          <Property Name="seat_number" Type="Int64" Nullable="false" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="flights" Relationship="Self.FK__tickets__flight___7755B73D" FromRole="tickets" ToRole="flights" />
+          <NavigationProperty Name="users" Relationship="Self.FK__tickets__user_id__7849DB76" FromRole="tickets" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -326,30 +359,10 @@
           <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="passport_series" Type="Int32" Nullable="false" />
           <Property Name="passport_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tickets" Relationship="Self.FK__tickets__id_pass__17036CC0" FromRole="passengers" ToRole="tickets" />
+          <NavigationProperty Name="system" Relationship="Self.FK__system__user_id__625A9A57" FromRole="users" ToRole="system" />
+          <NavigationProperty Name="tickets" Relationship="Self.FK__tickets__user_id__7849DB76" FromRole="users" ToRole="tickets" />
         </EntityType>
-        <EntityType Name="system">
-          <Key>
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="user_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="is_admin" Type="Boolean" Nullable="false" />
-          <Property Name="id_passenger" Type="Int64" />
-        </EntityType>
-        <EntityType Name="tickets">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="flight_id" Type="Int64" Nullable="false" />
-          <Property Name="seat_number" Type="Int64" Nullable="false" />
-          <Property Name="id_passenger" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="flights" Relationship="Self.FK__tickets__flight___160F4887" FromRole="tickets" ToRole="flights" />
-          <NavigationProperty Name="passengers" Relationship="Self.FK__tickets__id_pass__17036CC0" FromRole="tickets" ToRole="passengers" />
-        </EntityType>
-        <Association Name="FK__archive_f__airpl__0D7A0286">
+        <Association Name="FK__archive_f__airpl__72910220">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +374,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__airplan__08B54D69">
+        <Association Name="FK__flights__airplan__6DCC4D03">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,7 +386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__arriv__0F624AF8">
+        <Association Name="FK__archive_f__arriv__74794A92">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,7 +398,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__depar__0E6E26BF">
+        <Association Name="FK__archive_f__depar__73852659">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,8 +410,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cities__country___02FC7413">
-          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+        <Association Name="FK__cities__country___681373AD">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
           <End Role="cities" Type="Self.cities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="country">
@@ -409,7 +422,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__arrival__0A9D95DB">
+        <Association Name="FK__flights__arrival__6FB49575">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -421,7 +434,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__departu__09A971A2">
+        <Association Name="FK__flights__departu__6EC0713C">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -433,7 +446,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tickets__flight___160F4887">
+        <Association Name="FK__tickets__flight___7755B73D">
           <End Role="flights" Type="Self.flights" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,15 +458,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tickets__id_pass__17036CC0">
-          <End Role="passengers" Type="Self.passengers" Multiplicity="1" />
+        <Association Name="FK__system__user_id__625A9A57">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="system" Type="Self.system" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="system">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tickets__user_id__7849DB76">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="passengers">
+            <Principal Role="users">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tickets">
-              <PropertyRef Name="id_passenger" />
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -463,43 +488,47 @@
           <EntitySet Name="cities" EntityType="Self.cities" />
           <EntitySet Name="country" EntityType="Self.country" />
           <EntitySet Name="flights" EntityType="Self.flights" />
-          <EntitySet Name="passengers" EntityType="Self.passengers" />
           <EntitySet Name="system" EntityType="Self.system" />
           <EntitySet Name="tickets" EntityType="Self.tickets" />
-          <AssociationSet Name="FK__archive_f__airpl__0D7A0286" Association="Self.FK__archive_f__airpl__0D7A0286">
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK__archive_f__airpl__72910220" Association="Self.FK__archive_f__airpl__72910220">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__airplan__08B54D69" Association="Self.FK__flights__airplan__08B54D69">
+          <AssociationSet Name="FK__flights__airplan__6DCC4D03" Association="Self.FK__flights__airplan__6DCC4D03">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__arriv__0F624AF8" Association="Self.FK__archive_f__arriv__0F624AF8">
+          <AssociationSet Name="FK__archive_f__arriv__74794A92" Association="Self.FK__archive_f__arriv__74794A92">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__depar__0E6E26BF" Association="Self.FK__archive_f__depar__0E6E26BF">
+          <AssociationSet Name="FK__archive_f__depar__73852659" Association="Self.FK__archive_f__depar__73852659">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__cities__country___02FC7413" Association="Self.FK__cities__country___02FC7413">
+          <AssociationSet Name="FK__cities__country___681373AD" Association="Self.FK__cities__country___681373AD">
             <End Role="country" EntitySet="country" />
             <End Role="cities" EntitySet="cities" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__arrival__0A9D95DB" Association="Self.FK__flights__arrival__0A9D95DB">
+          <AssociationSet Name="FK__flights__arrival__6FB49575" Association="Self.FK__flights__arrival__6FB49575">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__departu__09A971A2" Association="Self.FK__flights__departu__09A971A2">
+          <AssociationSet Name="FK__flights__departu__6EC0713C" Association="Self.FK__flights__departu__6EC0713C">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__flight___160F4887" Association="Self.FK__tickets__flight___160F4887">
+          <AssociationSet Name="FK__tickets__flight___7755B73D" Association="Self.FK__tickets__flight___7755B73D">
             <End Role="flights" EntitySet="flights" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__id_pass__17036CC0" Association="Self.FK__tickets__id_pass__17036CC0">
-            <End Role="passengers" EntitySet="passengers" />
+          <AssociationSet Name="FK__system__user_id__625A9A57" Association="Self.FK__system__user_id__625A9A57">
+            <End Role="users" EntitySet="users" />
+            <End Role="system" EntitySet="system" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tickets__user_id__7849DB76" Association="Self.FK__tickets__user_id__7849DB76">
+            <End Role="users" EntitySet="users" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
         </EntityContainer>
@@ -565,19 +594,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="passengers">
-            <EntityTypeMapping TypeName="course_work_WPF_EFModel.passengers">
-              <MappingFragment StoreEntitySet="passengers">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="passport_series" ColumnName="passport_series" />
-                <ScalarProperty Name="passport_id" ColumnName="passport_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="system">
             <EntityTypeMapping TypeName="course_work_WPF_EFModel.system">
               <MappingFragment StoreEntitySet="system">
@@ -585,7 +601,6 @@
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="is_admin" ColumnName="is_admin" />
-                <ScalarProperty Name="id_passenger" ColumnName="id_passenger" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -595,7 +610,20 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="flight_id" ColumnName="flight_id" />
                 <ScalarProperty Name="seat_number" ColumnName="seat_number" />
-                <ScalarProperty Name="id_passenger" ColumnName="id_passenger" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="course_work_WPF_EFModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="passport_series" ColumnName="passport_series" />
+                <ScalarProperty Name="passport_id" ColumnName="passport_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

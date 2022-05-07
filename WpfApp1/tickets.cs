@@ -17,9 +17,9 @@ namespace WpfApp1
         public long id { get; set; }
         public long flight_id { get; set; }
         public long seat_number { get; set; }
-        public long id_passenger { get; set; }
+        public long user_id { get; set; }
     
         public virtual flights flights { get; set; }
-        public virtual passengers passengers { get; set; }
+        public virtual users users { get; set; }
     }
 }

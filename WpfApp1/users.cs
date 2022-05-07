@@ -12,10 +12,10 @@ namespace WpfApp1
     using System;
     using System.Collections.Generic;
     
-    public partial class passengers
+    public partial class users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public passengers()
+        public users()
         {
             this.tickets = new HashSet<tickets>();
         }
@@ -28,6 +28,7 @@ namespace WpfApp1
         public int passport_series { get; set; }
         public int passport_id { get; set; }
     
+        public virtual system system { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tickets> tickets { get; set; }
     }

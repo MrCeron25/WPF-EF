@@ -25,7 +25,7 @@ namespace WpfApp1
     
         public long id { get; set; }
         public string name { get; set; }
-        public Nullable<long> country_id { get; set; }
+        public long country_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<archive_flights> archive_flights { get; set; }
