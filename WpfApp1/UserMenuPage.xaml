@@ -20,8 +20,7 @@
                        FontFamily="Arial Black"
                        FontSize="18"
                        Text="Пользователь"/>
-            <TextBlock FontFamily="Arial Black"
-                       FontSize="18"
+            <TextBlock FontSize="18"
                        HorizontalAlignment="Center"
                        x:Name="UserLogin"/>
         </StackPanel>
@@ -35,7 +34,6 @@
                     Content="Покупка билетов"
                     MinHeight="30"
                     Margin="10,10,10,10"
-                    FontFamily="Arial Black"
                     FontSize="18"
                     Click="BuyingTickets_Click"/>
 
@@ -44,7 +42,6 @@
                     MinHeight="30"
                     Background="#E4F9F5"
                     Margin="10,10,10,10"
-                    FontFamily="Arial Black"
                     FontSize="18"
                     Click="MyTickets_Click"/>
 
@@ -53,7 +50,6 @@
                     Background="#E4F9F5"
                     MinHeight="30"
                     Margin="10,10,10,10"
-                    FontFamily="Arial Black"
                     FontSize="18"
                     Click="Exit_Click"/>
         </StackPanel>

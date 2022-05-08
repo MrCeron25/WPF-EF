@@ -19,7 +19,7 @@
             <TextBlock Text="Логин" 
                        FontSize="20"
                        TextAlignment="Center"/>
-            <TextBox Text="1" 
+            <TextBox Text="2" 
                      x:Name="Login" 
                      TextAlignment="Center"
                      FontSize="20"
@@ -29,7 +29,7 @@
                        TextAlignment="Center"/>
             <PasswordBox x:Name="Password" 
                          FontSize="20"
-                         Password="1"
+                         Password="2"
                          Margin="20,20,20,20"/>
             <TextBlock x:Name="RegistrationLink"
                        Text="Регистрация"

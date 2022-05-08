@@ -1,0 +1,37 @@
+﻿<Window x:Class="WpfApp1.CityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="CityWindow" 
+        Height="230" 
+        Width="400"
+        MaxHeight="230" 
+        MaxWidth="400">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Город"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10,10,10,10"/>
+            <TextBox x:Name="CityName"
+                     TextAlignment="Center"
+                     Margin="10,10,10,10"
+                     TextChanged="CityName_TextChanged"/>
+            <TextBlock Text="Страна" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10,10,10,10"/>
+            <ComboBox x:Name="Countries"
+                      Margin="10,10,10,10"
+                      SelectionChanged="Countries_SelectionChanged"/>
+            <Button x:Name="Button"
+                    Content="ButtonName"
+                    IsEnabled="False"
+                    Margin="10,10,10,10"
+                    Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

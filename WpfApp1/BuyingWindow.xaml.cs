@@ -33,14 +33,7 @@ namespace WpfApp1
 
         private void NumberOfSeats_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (NumberOfSeats.SelectedItem != null)
-            {
-                Buy.IsEnabled = true;
-            }
-            else
-            {
-                Buy.IsEnabled = false;
-            }
+            Buy.IsEnabled = NumberOfSeats.SelectedItem != null;
         }
 
         private void Buy_Click(object sender, RoutedEventArgs e)

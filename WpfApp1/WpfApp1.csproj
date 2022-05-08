@@ -49,6 +49,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminMenuPage.xaml.cs">
+      <DependentUpon>AdminMenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="airplane.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -82,8 +86,17 @@
     <Compile Include="cities.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="CitiesAndCountriesPage.xaml.cs">
+      <DependentUpon>CitiesAndCountriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CityWindow.xaml.cs">
+      <DependentUpon>CityWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="country.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryWindow.xaml.cs">
+      <DependentUpon>CountryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="flights.cs">
@@ -134,11 +147,27 @@
     <Compile Include="UserTicketPage.xaml.cs">
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="AdminMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BuyingTicketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BuyingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CitiesAndCountriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CityWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CountryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

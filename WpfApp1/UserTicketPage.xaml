@@ -19,7 +19,6 @@
                 Background="#F38181"
                 Content="Сохранить билеты"
                 Margin="10,10,10,10"
-                FontFamily="Arial Black"
                 FontSize="18"
                 MaxWidth="200"
                 Click="SaveTickets_Click"/>

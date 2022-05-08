@@ -98,13 +98,12 @@ namespace WpfApp1
             BuyingWindow window = new BuyingWindow(Tickets.SelectedItem as Flight);
             if ((bool)window.ShowDialog())
             {
-                long SeatNumber = (long)window.NumberOfSeats.SelectedItem;
                 try
                 {
                     tickets Newticket = new tickets
                     {
                         flight_id = long.Parse(window.FlightId.Text),
-                        seat_number = SeatNumber,
+                        seat_number = (long)window.NumberOfSeats.SelectedItem,
                         user_id = SystemUser.user_id
                     };
                     Manager.Instance.Context.tickets.Add(Newticket);

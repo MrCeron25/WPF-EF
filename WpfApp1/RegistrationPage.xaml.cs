@@ -58,48 +58,55 @@ namespace WpfApp1
             {
                 if (CheckPassword(Password.Password))
                 {
-                    List<system> FoundUsers = (
+                    try
+                    {
+                        List<system> FoundUsers = (
                         from system in Manager.Instance.Context.system
                         where system.login == Login.Text
                         select system
                     ).ToList();
-                    if (FoundUsers.Count > 0)
-                    {
-                        MessageBox.Show("Логин занят.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        if (FoundUsers.Count > 0)
+                        {
+                            MessageBox.Show("Логин занят.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                users NewUser = new users
+                                {
+                                    name = Name.Text,
+                                    surname = Surname.Text,
+                                    sex = Sex.Text.Substring(0, 1),
+                                    date_of_birth = (DateTime)DateOfBirth.SelectedDate,
+                                    passport_id = int.Parse(PassportId.Text),
+                                    passport_series = int.Parse(PassportSeries.Text),
+                                };
+                                Manager.Instance.Context.users.Add(NewUser);
+                                Manager.Instance.Context.SaveChanges();
+
+                                system NewSystem = new system
+                                {
+                                    user_id = NewUser.id,
+                                    login = Login.Text,
+                                    password = Password.Password,
+                                    is_admin = false
+                                };
+                                Manager.Instance.Context.system.Add(NewSystem);
+                                Manager.Instance.Context.SaveChanges();
+
+                                MessageBox.Show("Вы зарегистрированы.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                                Manager.Instance.MainFrame.Navigate(new LoginPage());
+                            }
+                            catch (Exception error)
+                            {
+                                MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
                     }
-                    else
+                    catch (Exception error)
                     {
-                        try
-                        {
-                            users NewUser = new users
-                            {
-                                name = Name.Text,
-                                surname = Surname.Text,
-                                sex = Sex.Text.Substring(0, 1),
-                                date_of_birth = (DateTime)DateOfBirth.SelectedDate,
-                                passport_id = int.Parse(PassportId.Text),
-                                passport_series = int.Parse(PassportSeries.Text),
-                            };
-                            Manager.Instance.Context.users.Add(NewUser);
-                            Manager.Instance.Context.SaveChanges();
-
-                            system NewSystem = new system
-                            {
-                                user_id = NewUser.id,
-                                login = Login.Text,
-                                password = Password.Password,
-                                is_admin = false
-                            };
-                            Manager.Instance.Context.system.Add(NewSystem);
-                            Manager.Instance.Context.SaveChanges();
-
-                            MessageBox.Show("Вы зарегистрированы.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                            Manager.Instance.MainFrame.Navigate(new LoginPage());
-                        }
-                        catch (Exception error)
-                        {
-                            MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
