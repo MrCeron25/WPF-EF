@@ -74,6 +74,12 @@
     <Compile Include="airplane.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="AirplanesPage.xaml.cs">
+      <DependentUpon>AirplanesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AirplaneWindow.xaml.cs">
+      <DependentUpon>AirplaneWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="archive_flights.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -148,6 +154,14 @@
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AirplanesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AirplaneWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -48,12 +39,12 @@ namespace WpfApp1
                     };
                     Manager.Instance.Context.country.Add(NewCountry);
                     Manager.Instance.Context.SaveChanges();
+                    UpdateCountries();
                 }
                 catch (Exception error)
                 {
                     MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                UpdateCountries();
             }
         }
 
@@ -79,22 +70,20 @@ namespace WpfApp1
             window.CountryName.Text = CountryName;
             window.Button.IsEnabled = true;
             window.Button.Content = "Изменить";
-            if ((bool)window.ShowDialog())
+            if ((bool)window.ShowDialog() &&
+                CountryName != window.CountryName.Text)
             {
-                if (CountryName != window.CountryName.Text)
+                try
                 {
-                    try
-                    {
-                        SelectedCountry.name = window.CountryName.Text;
-                        Manager.Instance.Context.SaveChanges();
-                    }
-                    catch (Exception error)
-                    {
-                        MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    SelectedCountry.name = window.CountryName.Text;
+                    Manager.Instance.Context.SaveChanges();
                     UpdateCountries();
                     UpdateCities();
                     Countries.SelectedItem = null;
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -140,13 +129,13 @@ namespace WpfApp1
                     Manager.Instance.Context.cities.RemoveRange(cities);
                     Manager.Instance.Context.country.Remove(SelectedCountry);
                     Manager.Instance.Context.SaveChanges();
+                    UpdateCountries();
+                    UpdateCities();
                 }
                 catch (Exception error)
                 {
                     MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                UpdateCountries();
-                UpdateCities();
             }
         }
 
@@ -201,12 +190,12 @@ namespace WpfApp1
                         FoundCity.country_id = FoundCountry.id;
 
                         Manager.Instance.Context.SaveChanges();
+                        UpdateCities();
                     }
                     catch (Exception error)
                     {
                         MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    UpdateCities();
                 }
             }
         }
@@ -250,12 +239,12 @@ namespace WpfApp1
 
                     Manager.Instance.Context.cities.Remove(city);
                     Manager.Instance.Context.SaveChanges();
+                    UpdateCities();
                 }
                 catch (Exception error)
                 {
                     MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                UpdateCities();
             }
         }
 
@@ -280,12 +269,12 @@ namespace WpfApp1
                     };
                     Manager.Instance.Context.cities.Add(NewCity);
                     Manager.Instance.Context.SaveChanges();
+                    UpdateCities();
                 }
                 catch (Exception error)
                 {
                     MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                UpdateCities();
             }
         }
     }

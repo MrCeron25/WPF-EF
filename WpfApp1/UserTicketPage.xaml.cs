@@ -54,26 +54,6 @@ namespace WpfApp1
             Tickets.ItemsSource = Data.GetUserTickets(SystemUser);
         }
 
-        /*
-         select 
-			ti.id [№ билета],
-			fl.id [№ рейса],
-			ti.seat_number [№ места],
-			fl.departure_date,
-			fl.arrival_date,
-			fl.flight_name [Рейс],
-			fl.travel_time [Время в пути],
-			fl.price [Цена],
-			(select name from cities where id = fl.departure_city) AS [Город вылета],
-			(select name from cities where id = fl.arrival_city) AS [Город прибытия]
-		from tickets ti
-		join flights fl on 
-			ti.flight_id = fl.id
-		join airplane air on 
-			air.id = fl.airplane_id
-		where ti.id_passenger = @id_passenger;
-         */
-
         private void SaveTickets_Click(object sender, RoutedEventArgs e)
         {
             if (Tickets.Items.Count > 0)

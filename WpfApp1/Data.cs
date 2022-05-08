@@ -202,6 +202,23 @@ namespace WpfApp1
             }
         }
 
+        public static List<airplane> GetAirplanes()
+        {
+            try
+            {
+                List<airplane> data = (
+                    from airplane_ in Manager.Instance.Context.airplane
+                    select airplane_
+                ).ToList();
+                return data;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
         public static List<string> GetCountriesNames()
         {
             try

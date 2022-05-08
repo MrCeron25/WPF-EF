@@ -22,10 +22,12 @@
                     Click="CitiesAndCountries_Click"/>
 
             <Button FontSize="20"
+                    x:Name="Airplanes"
                     Margin="10,10,10,10"
                     Background="#A3DE83"
                     Content="Самолёты"
-                    Height="30"/>
+                    Height="30"
+                    Click="Airplanes_Click"/>
 
             <Button FontSize="20"
                     Margin="10,10,10,10"
