@@ -18,7 +18,7 @@ namespace WpfApp1
             }
         }
 
-        public course_work_WPF_EFEntities Context { get; set; }
+        public course_work_WPF_EFEntities1 Context { get; set; }
         public MainWindow MainWindow { get; set; }
         public Frame MainFrame { get; set; }
         public Frame MenuFrame { get; set; }

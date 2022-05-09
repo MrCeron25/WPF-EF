@@ -63,6 +63,14 @@
                     Height="30"
                     Click="Reports_Click"/>
 
+            <Button FontSize="20"
+                    Margin="10,10,10,10"
+                    Background="#FFB906"
+                    Content="Архив"
+                    x:Name="ArchiveFlights"
+                    Height="30"
+                    Click="ArchiveFlights_Click"/>
+
             <Button x:Name="Exit"
                     FontSize="20"
                     Background="#FFB906"

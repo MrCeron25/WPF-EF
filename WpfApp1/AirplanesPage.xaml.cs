@@ -90,7 +90,7 @@ namespace WpfApp1
         private void DeleteAirplane_Click(object sender, RoutedEventArgs e)
         {
             airplane SelectedAirplane = Airplanes.SelectedItem as airplane;
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить самолёт?\nБудут удалены все связанные записи (рейсы, архивные рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить самолёт?\nБудут удалены все связанные записи (рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 try
@@ -110,13 +110,6 @@ namespace WpfApp1
                         Manager.Instance.Context.tickets.RemoveRange(tickets);
                     }
                     Manager.Instance.Context.flights.RemoveRange(flights);
-
-                    List<archive_flights> archive_flights = (
-                        from archive_flight in Manager.Instance.Context.archive_flights
-                        where archive_flight.airplane_id == SelectedAirplane.id
-                        select archive_flight
-                    ).ToList();
-                    Manager.Instance.Context.archive_flights.RemoveRange(archive_flights);
 
                     Manager.Instance.Context.airplane.Remove(SelectedAirplane);
                     Manager.Instance.Context.SaveChanges();

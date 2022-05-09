@@ -90,7 +90,7 @@ namespace WpfApp1
 
         private void DeleteCountry_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить страну?\nБудут удалены все связанные записи (страны, города, рейсы, архивные рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить страну?\nБудут удалены все связанные записи (страны, города, рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 try
@@ -118,13 +118,6 @@ namespace WpfApp1
                             Manager.Instance.Context.tickets.RemoveRange(tickets);
                         }
                         Manager.Instance.Context.flights.RemoveRange(flights);
-
-                        List<archive_flights> archive_flights = (
-                            from archive_flight in Manager.Instance.Context.archive_flights
-                            where (archive_flight.departure_city == city.id) || (archive_flight.arrival_city == city.id)
-                            select archive_flight
-                        ).ToList();
-                        Manager.Instance.Context.archive_flights.RemoveRange(archive_flights);
                     }
                     Manager.Instance.Context.cities.RemoveRange(cities);
                     Manager.Instance.Context.country.Remove(SelectedCountry);
@@ -202,7 +195,7 @@ namespace WpfApp1
 
         private void DeleteCity_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить город?\nБудут удалены все связанные записи (города, рейсы, архивные рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить город?\nБудут удалены все связанные записи (города, рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
             if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 try
@@ -229,13 +222,6 @@ namespace WpfApp1
                         Manager.Instance.Context.tickets.RemoveRange(tickets);
                     }
                     Manager.Instance.Context.flights.RemoveRange(flights);
-
-                    List<archive_flights> archive_flights = (
-                        from archive_flight in Manager.Instance.Context.archive_flights
-                        where (archive_flight.departure_city == city.id) || (archive_flight.arrival_city == city.id)
-                        select archive_flight
-                    ).ToList();
-                    Manager.Instance.Context.archive_flights.RemoveRange(archive_flights);
 
                     Manager.Instance.Context.cities.Remove(city);
                     Manager.Instance.Context.SaveChanges();

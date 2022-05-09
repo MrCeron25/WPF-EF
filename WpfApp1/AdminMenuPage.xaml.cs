@@ -38,5 +38,10 @@ namespace WpfApp1
         {
             Manager.Instance.MainFrame.Navigate(new FlightsPage());
         }
+
+        private void ArchiveFlights_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

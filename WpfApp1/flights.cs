@@ -29,6 +29,7 @@ namespace WpfApp1
         public System.TimeSpan travel_time { get; set; }
         public Nullable<System.DateTime> arrival_date { get; set; }
         public double price { get; set; }
+        public bool is_archive { get; set; }
     
         public virtual airplane airplane { get; set; }
         public virtual cities cities { get; set; }

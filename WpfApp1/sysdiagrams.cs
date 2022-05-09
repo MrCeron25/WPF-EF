@@ -12,20 +12,12 @@ namespace WpfApp1
     using System;
     using System.Collections.Generic;
     
-    public partial class archive_flights
+    public partial class sysdiagrams
     {
-        public long id { get; set; }
-        public string flight_name { get; set; }
-        public Nullable<long> departure_city { get; set; }
-        public Nullable<long> arrival_city { get; set; }
-        public long airplane_id { get; set; }
-        public System.DateTime departure_date { get; set; }
-        public System.TimeSpan travel_time { get; set; }
-        public Nullable<System.DateTime> arrival_date { get; set; }
-        public double price { get; set; }
-    
-        public virtual airplane airplane { get; set; }
-        public virtual cities cities { get; set; }
-        public virtual cities cities1 { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

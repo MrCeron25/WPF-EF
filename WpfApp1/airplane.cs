@@ -17,7 +17,6 @@ namespace WpfApp1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public airplane()
         {
-            this.archive_flights = new HashSet<archive_flights>();
             this.flights = new HashSet<flights>();
         }
     
@@ -25,8 +24,6 @@ namespace WpfApp1
         public string model { get; set; }
         public int number_of_seats { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<archive_flights> archive_flights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<flights> flights { get; set; }
     }

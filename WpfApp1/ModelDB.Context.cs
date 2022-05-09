@@ -12,13 +12,11 @@ namespace WpfApp1
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class course_work_WPF_EFEntities : DbContext
+    public partial class course_work_WPF_EFEntities1 : DbContext
     {
-        public course_work_WPF_EFEntities()
-            : base("name=course_work_WPF_EFEntities")
+        public course_work_WPF_EFEntities1()
+            : base("name=course_work_WPF_EFEntities1")
         {
         }
     
@@ -28,17 +26,12 @@ namespace WpfApp1
         }
     
         public virtual DbSet<airplane> airplane { get; set; }
-        public virtual DbSet<archive_flights> archive_flights { get; set; }
         public virtual DbSet<cities> cities { get; set; }
         public virtual DbSet<country> country { get; set; }
         public virtual DbSet<flights> flights { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<system> system { get; set; }
         public virtual DbSet<tickets> tickets { get; set; }
         public virtual DbSet<users> users { get; set; }
-    
-        public virtual ObjectResult<GetStatisticsOnSoldTickets_Result> GetStatisticsOnSoldTickets()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStatisticsOnSoldTickets_Result>("GetStatisticsOnSoldTickets");
-        }
     }
 }

@@ -32,6 +32,7 @@ namespace WpfApp1
 
     public class FlightInfo
     {
+        public long FlightId { get; set; }
         public string FlightName { get; set; }
         public string DepartureCity { get; set; }
         public string ArrivalCity { get; set; }
@@ -93,6 +94,7 @@ namespace WpfApp1
                 List<StatisticOnTickets> data = (
                      from ti in Manager.Instance.Context.tickets
                      join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
+                     where fl.is_archive == false
                      orderby fl.departure_date
                      group fl by fl.departure_date into g
                      select new StatisticOnTickets
@@ -132,7 +134,8 @@ namespace WpfApp1
                           (fl.arrival_date <= EndDate) &&
                           (air.number_of_seats - (from ti in Manager.Instance.Context.tickets
                                                   where fl.id == ti.flight_id
-                                                  select ti).Count() > 0)
+                                                  select ti).Count() > 0) &&
+                          fl.is_archive == false
                     select new Flight
                     {
                         FlightId = fl.id,
@@ -181,7 +184,8 @@ namespace WpfApp1
                           (fl.departure_date >= StartDate) &&
                           (air.number_of_seats - (from ti in Manager.Instance.Context.tickets
                                                   where fl.id == ti.flight_id
-                                                  select ti).Count() > 0)
+                                                  select ti).Count() > 0) &&
+                          fl.is_archive == false
                     select new Flight
                     {
                         FlightId = fl.id,
@@ -221,7 +225,8 @@ namespace WpfApp1
                     join user in Manager.Instance.Context.users on ti.user_id equals user.id
                     join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
                     join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
-                    where ti.user_id == SystemUser.user_id
+                    where ti.user_id == SystemUser.user_id &&
+                          fl.is_archive == false
                     select new Ticket
                     {
                         Id = ti.id,
@@ -258,8 +263,10 @@ namespace WpfApp1
                 List<FlightInfo> data = (
                     from fl in Manager.Instance.Context.flights
                     join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
+                    where fl.is_archive == false
                     select new FlightInfo
                     {
+                        FlightId = fl.id,
                         FlightName = fl.flight_name,
                         DepartureCity = (from ci in Manager.Instance.Context.cities
                                          where fl.departure_city == ci.id
@@ -364,7 +371,8 @@ namespace WpfApp1
                 List<long> data = (
                     from fl in Manager.Instance.Context.flights
                     join ti in Manager.Instance.Context.tickets on fl.id equals ti.flight_id
-                    where fl.id == FlightId
+                    where fl.id == FlightId &&
+                          fl.is_archive == false
                     select ti.seat_number
                  ).ToList();
                 return data;

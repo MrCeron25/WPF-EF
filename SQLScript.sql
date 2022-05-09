@@ -76,23 +76,7 @@ create table flights(
 	[travel_time] time not null,
 	[arrival_date] AS DATEADD(MINUTE, DATEDIFF(MINUTE, 0, [travel_time]), [departure_date]),
 	[price] float not null,
-	FOREIGN KEY (airplane_id) REFERENCES airplane (id),
-	FOREIGN KEY ([departure_city]) REFERENCES cities (id),
-	FOREIGN KEY ([arrival_city]) REFERENCES cities (id)
-);
-
--- архив
-drop table if exists archive_flights;
-create table archive_flights(
-	id bigint identity primary key,
-	[flight_name] nvarchar(10) not null,
-	[departure_city] bigint,
-	[arrival_city] bigint,
-	airplane_id bigint not null,
-	[departure_date] datetime not null, 
-	[travel_time] time not null,
-	[arrival_date] AS DATEADD(MINUTE, DATEDIFF(MINUTE, 0, [travel_time]), [departure_date]),
-	[price] float not null,
+	[is_archive] bit not null default 0,
 	FOREIGN KEY (airplane_id) REFERENCES airplane (id),
 	FOREIGN KEY ([departure_city]) REFERENCES cities (id),
 	FOREIGN KEY ([arrival_city]) REFERENCES cities (id)

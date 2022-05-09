@@ -17,8 +17,6 @@ namespace WpfApp1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cities()
         {
-            this.archive_flights = new HashSet<archive_flights>();
-            this.archive_flights1 = new HashSet<archive_flights>();
             this.flights = new HashSet<flights>();
             this.flights1 = new HashSet<flights>();
         }
@@ -27,10 +25,6 @@ namespace WpfApp1
         public string name { get; set; }
         public long country_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<archive_flights> archive_flights { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<archive_flights> archive_flights1 { get; set; }
         public virtual country country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<flights> flights { get; set; }
