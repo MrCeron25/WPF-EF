@@ -8,42 +8,64 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminMenuPage">
 
-    <Grid Background="#F3E8CB">
+    <Grid Background="#3DB9EB">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0">
+            <TextBlock Grid.Row="0"
+                       HorizontalAlignment="Center"
+                       FontFamily="Arial Black"
+                       FontSize="18"
+                       Text="Администратор"/>
+            <TextBlock FontSize="18"
+                       HorizontalAlignment="Center"
+                       x:Name="AdminLogin"/>
+        </StackPanel>
+
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Bottom">
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1">
 
             <Button FontSize="20"
                     Margin="10,10,10,10"
                     x:Name="CitiesAndCountries"
                     Content="Города и страны"
-                    Background="#FD94B4"
+                    Background="#FFB906"
                     Height="30"
                     Click="CitiesAndCountries_Click"/>
 
             <Button FontSize="20"
                     x:Name="Airplanes"
                     Margin="10,10,10,10"
-                    Background="#A3DE83"
+                    Background="#FFB906"
                     Content="Самолёты"
                     Height="30"
                     Click="Airplanes_Click"/>
 
             <Button FontSize="20"
                     Margin="10,10,10,10"
-                    Background="#70A1D7"
+                    Background="#FFB906"
                     Content="Рейсы"
-                    Height="30"/>
+                    x:Name="Flights"
+                    Height="30"
+                    Click="Flights_Click"/>
 
             <Button FontSize="20"
                     Margin="10,10,10,10"
-                    Background="#15B7B9"
-                    Content="Отчёты"
-                    Height="30"/>
+                    Background="#FFB906"
+                    x:Name="Reports"
+                    Content="Сумма от продаж"
+                    Height="30"
+                    Click="Reports_Click"/>
 
             <Button x:Name="Exit"
                     FontSize="20"
-                    Background="#FF6F3C"
+                    Background="#FFB906"
                     Margin="10,10,10,10"
                     Height="30"
                     Content="Выход"

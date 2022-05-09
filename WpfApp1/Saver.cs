@@ -10,23 +10,22 @@ namespace WpfApp1
 {
     public class Saver
     {
-        public static void Save(string SaveFolder, string FileName, string SaveData, string extension = "txt")
+        public static void Save(string SaveFolder, string FileName, string SaveData, string extension = ".txt")
         {
             try
             {
-                FileName += $".{extension}";
-                string FullPathNewFile = $"{SaveFolder}\\{FileName}";
-                using (FileStream fs = new FileStream(FullPathNewFile, FileMode.Create))
+                string FullPathFile = $"{SaveFolder}\\{FileName}{extension}";
+                using (FileStream fileStream = new FileStream(FullPathFile, FileMode.Create))
                 {
-                    using (StreamWriter sw = new StreamWriter(fs))
+                    using (StreamWriter streamWriter = new StreamWriter(fileStream))
                     {
-                        sw.Write(SaveData);
+                        streamWriter.Write(SaveData);
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                MessageBox.Show($"Ошибка :\n{e.Message}.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

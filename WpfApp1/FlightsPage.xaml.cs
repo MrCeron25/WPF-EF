@@ -15,14 +15,17 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для MyTickets.xaml
-    /// </summary>
-    public partial class MyTickets : Page
+    public partial class FlightsPage : Page
     {
-        public MyTickets()
+        private void GetFlights()
+        {
+            Flights.ItemsSource = Data.GetFlights();
+        }
+
+        public FlightsPage()
         {
             InitializeComponent();
+            GetFlights();
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище course_work_WPF_EFModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище course_work_WPF_EFModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="airplane">
           <Key>
             <PropertyRef Name="id" />
@@ -86,7 +86,7 @@
           <Property Name="passport_series" Type="int" Nullable="false" />
           <Property Name="passport_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__archive_f__airpl__72910220">
+        <Association Name="FK__archive_f__airpl__70099B30">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +98,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__arriv__74794A92">
+        <Association Name="FK__archive_f__arriv__71F1E3A2">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -110,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__archive_f__depar__73852659">
+        <Association Name="FK__archive_f__depar__70FDBF69">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="archive_flights" Type="Self.archive_flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,7 +122,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cities__country___681373AD">
+        <Association Name="FK__cities__country___658C0CBD">
           <End Role="country" Type="Self.country" Multiplicity="1" />
           <End Role="cities" Type="Self.cities" Multiplicity="*" />
           <ReferentialConstraint>
@@ -134,7 +134,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__airplan__6DCC4D03">
+        <Association Name="FK__flights__airplan__6B44E613">
           <End Role="airplane" Type="Self.airplane" Multiplicity="1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -146,7 +146,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__arrival__6FB49575">
+        <Association Name="FK__flights__arrival__6D2D2E85">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__flights__departu__6EC0713C">
+        <Association Name="FK__flights__departu__6C390A4C">
           <End Role="cities" Type="Self.cities" Multiplicity="0..1" />
           <End Role="flights" Type="Self.flights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +170,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__system__user_id__625A9A57">
+        <Association Name="FK__system__user_id__5FD33367">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="system" Type="Self.system" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -182,7 +182,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tickets__flight___7755B73D">
+        <Association Name="FK__tickets__flight___74CE504D">
           <End Role="flights" Type="Self.flights" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +194,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tickets__user_id__7849DB76">
+        <Association Name="FK__tickets__user_id__75C27486">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="tickets" Type="Self.tickets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -206,6 +206,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetStatisticsOnSoldTickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище course_work_WPF_EFModelContainer">
           <EntitySet Name="airplane" EntityType="Self.airplane" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="archive_flights" EntityType="Self.archive_flights" Schema="dbo" store:Type="Tables" />
@@ -215,49 +216,48 @@
           <EntitySet Name="system" EntityType="Self.system" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tickets" EntityType="Self.tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__archive_f__airpl__72910220" Association="Self.FK__archive_f__airpl__72910220">
+          <AssociationSet Name="FK__archive_f__airpl__70099B30" Association="Self.FK__archive_f__airpl__70099B30">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__arriv__74794A92" Association="Self.FK__archive_f__arriv__74794A92">
+          <AssociationSet Name="FK__archive_f__arriv__71F1E3A2" Association="Self.FK__archive_f__arriv__71F1E3A2">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__archive_f__depar__73852659" Association="Self.FK__archive_f__depar__73852659">
+          <AssociationSet Name="FK__archive_f__depar__70FDBF69" Association="Self.FK__archive_f__depar__70FDBF69">
             <End Role="cities" EntitySet="cities" />
             <End Role="archive_flights" EntitySet="archive_flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__cities__country___681373AD" Association="Self.FK__cities__country___681373AD">
+          <AssociationSet Name="FK__cities__country___658C0CBD" Association="Self.FK__cities__country___658C0CBD">
             <End Role="country" EntitySet="country" />
             <End Role="cities" EntitySet="cities" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__airplan__6DCC4D03" Association="Self.FK__flights__airplan__6DCC4D03">
+          <AssociationSet Name="FK__flights__airplan__6B44E613" Association="Self.FK__flights__airplan__6B44E613">
             <End Role="airplane" EntitySet="airplane" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__arrival__6FB49575" Association="Self.FK__flights__arrival__6FB49575">
+          <AssociationSet Name="FK__flights__arrival__6D2D2E85" Association="Self.FK__flights__arrival__6D2D2E85">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__flights__departu__6EC0713C" Association="Self.FK__flights__departu__6EC0713C">
+          <AssociationSet Name="FK__flights__departu__6C390A4C" Association="Self.FK__flights__departu__6C390A4C">
             <End Role="cities" EntitySet="cities" />
             <End Role="flights" EntitySet="flights" />
           </AssociationSet>
-          <AssociationSet Name="FK__system__user_id__625A9A57" Association="Self.FK__system__user_id__625A9A57">
+          <AssociationSet Name="FK__system__user_id__5FD33367" Association="Self.FK__system__user_id__5FD33367">
             <End Role="users" EntitySet="users" />
             <End Role="system" EntitySet="system" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__flight___7755B73D" Association="Self.FK__tickets__flight___7755B73D">
+          <AssociationSet Name="FK__tickets__flight___74CE504D" Association="Self.FK__tickets__flight___74CE504D">
             <End Role="flights" EntitySet="flights" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
-          <AssociationSet Name="FK__tickets__user_id__7849DB76" Association="Self.FK__tickets__user_id__7849DB76">
+          <AssociationSet Name="FK__tickets__user_id__75C27486" Association="Self.FK__tickets__user_id__75C27486">
             <End Role="users" EntitySet="users" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="course_work_WPF_EFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -531,7 +531,13 @@
             <End Role="users" EntitySet="users" />
             <End Role="tickets" EntitySet="tickets" />
           </AssociationSet>
+          <FunctionImport Name="GetStatisticsOnSoldTickets" ReturnType="Collection(course_work_WPF_EFModel.GetStatisticsOnSoldTickets_Result)" />
         </EntityContainer>
+        <ComplexType Name="GetStatisticsOnSoldTickets_Result">
+          <Property Type="Int32" Name="Год" Nullable="true" />
+          <Property Type="String" Name="Месяц" Nullable="true" MaxLength="30" />
+          <Property Type="Double" Name="Сумма_по_всем_билетам" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -627,6 +633,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetStatisticsOnSoldTickets" FunctionName="Хранилище course_work_WPF_EFModel.GetStatisticsOnSoldTickets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="course_work_WPF_EFModel.GetStatisticsOnSoldTickets_Result">
+                <ScalarProperty Name="Год" ColumnName="Год" />
+                <ScalarProperty Name="Месяц" ColumnName="Месяц" />
+                <ScalarProperty Name="Сумма_по_всем_билетам" ColumnName="Сумма по всем билетам" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

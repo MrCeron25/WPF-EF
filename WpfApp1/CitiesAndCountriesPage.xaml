@@ -9,7 +9,7 @@
       d:DesignWidth="800"
       Title="CitiesAndCountriesPage">
 
-    <Grid Background="#CA82F8">
+    <Grid Background="#336CC1">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
@@ -21,12 +21,14 @@
 
         <TextBlock Text="Города"
                    Grid.Row="0"
+                   Foreground="White"
                    Grid.Column="0"
                    FontSize="20"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"/>
         <ListView Grid.Row="0"
                   Grid.Column="0"
+                  Background="#9BDBEF"
                   SelectionMode="Single"
                   Margin="10,30,10,10"
                   SelectionChanged="Cities_SelectionChanged"
@@ -41,6 +43,7 @@
 
 
         <TextBlock Text="Страны"
+                   Foreground="White"
                    Grid.Row="0"
                    Grid.Column="1"
                    FontSize="20"
@@ -48,6 +51,7 @@
                    HorizontalAlignment="Center"/>
         <ListView Grid.Row="0"
                   Grid.Column="1"
+                  Background="#9BDBEF"
                   SelectionMode="Single"
                   SelectionChanged="Countries_SelectionChanged"
                   Margin="10,30,10,10"
@@ -66,17 +70,20 @@
             <Button Content="Добавить"
                     MinWidth="80"
                     x:Name="AddCity"
+                    Background="#FFB906"
                     Margin="5,5,5,5"
                     Click="AddCity_Click"/>
             <Button Content="Изменить"
                     MinWidth="80"
                     x:Name="ChangeCity"
+                    Background="#FFB906"
                     IsEnabled="False"
                     Margin="5,5,5,5"
                     Click="ChangeCity_Click"/>
             <Button Content="Удалить"
                     MinWidth="80"
                     x:Name="DeleteCity"
+                    Background="#FFB906"
                     IsEnabled="False"
                     Margin="5,5,5,5"
                     Click="DeleteCity_Click"/>
@@ -88,17 +95,20 @@
                     HorizontalAlignment="Center">
             <Button Content="Добавить"
                     x:Name="AddCountry"
+                    Background="#FFB906"
                     MinWidth="80"
                     Margin="5,5,5,5"
                     Click="AddCountry_Click"/>
             <Button Content="Изменить"
                     MinWidth="80"
+                    Background="#FFB906"
                     IsEnabled="False"
                     Margin="5,5,5,5"
                     x:Name="ChangeCountry"
                     Click="ChangeCountry_Click"/>
             <Button Content="Удалить"
                     IsEnabled="False"
+                    Background="#FFB906"
                     MinWidth="80"
                     Margin="5,5,5,5"
                     Name="DeleteCountry"

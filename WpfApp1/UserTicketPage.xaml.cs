@@ -46,33 +46,37 @@ namespace WpfApp1
 
     public partial class UserTicketPage : Page
     {
-
+        private system SystemUser { get; set; }
+        private void UpdateUserTickets()
+        {
+            Tickets.ItemsSource = Data.GetUserTickets(SystemUser);
+        }
 
         public UserTicketPage(system SystemUser)
         {
             InitializeComponent();
-            Tickets.ItemsSource = Data.GetUserTickets(SystemUser);
+            this.SystemUser = SystemUser;
+            UpdateUserTickets();
         }
 
         private void SaveTickets_Click(object sender, RoutedEventArgs e)
         {
             if (Tickets.Items.Count > 0)
             {
-                string DirPath = Directory.GetCurrentDirectory();
-                string SaveFolder = $"{DirPath}\\Tickets";
+                string Folder = $"{Directory.GetCurrentDirectory()}\\Tickets";
                 try
                 {
-                    if (!Directory.Exists(SaveFolder))
+                    if (!Directory.Exists(Folder))
                     {
-                        DirectoryInfo di = Directory.CreateDirectory(SaveFolder);
+                        DirectoryInfo di = Directory.CreateDirectory(Folder);
                     }
                     foreach (Ticket ticket in Tickets.Items)
                     {
-                        Saver.Save(SaveFolder,
+                        Saver.Save(Folder,
                                    ticket.GetTicketName(),
                                    ticket.CreateTicket());
                     }
-                    MessageBox.Show($"Билеты сохранены по пути:\n{SaveFolder}.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Билеты сохранены по пути:\n{Folder}.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception error)
                 {

@@ -12,6 +12,8 @@ namespace WpfApp1
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class course_work_WPF_EFEntities : DbContext
     {
@@ -33,5 +35,10 @@ namespace WpfApp1
         public virtual DbSet<system> system { get; set; }
         public virtual DbSet<tickets> tickets { get; set; }
         public virtual DbSet<users> users { get; set; }
+    
+        public virtual ObjectResult<GetStatisticsOnSoldTickets_Result> GetStatisticsOnSoldTickets()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStatisticsOnSoldTickets_Result>("GetStatisticsOnSoldTickets");
+        }
     }
 }

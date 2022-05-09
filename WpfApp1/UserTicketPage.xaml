@@ -5,18 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
       Title="UserTicketPage">
 
-    <Grid Background="#EAFFD0">
+    <Grid Background="#11999E">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0"
                 x:Name="SaveTickets"
-                Background="#F38181"
+                Background="#FFB906"
                 Content="Сохранить билеты"
                 Margin="10,10,10,10"
                 FontSize="18"
@@ -26,7 +27,6 @@
         <ListView x:Name="Tickets"
                   Grid.Row="1"
                   SelectionMode="Single"
-                  Background="Transparent"
                   Margin="10,10,10,10">
             <ListView.View>
                 <GridView>

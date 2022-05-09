@@ -32,6 +32,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
             <TextBlock Text="Город вылета" 
+                       Foreground="White"
                        HorizontalAlignment="Center"/>
             <TextBox x:Name="from"
                      Text="а"
@@ -50,6 +51,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
             <TextBlock Text="Город прилёта"
+                       Foreground="White"
                        HorizontalAlignment="Center"/>
             <TextBox x:Name="to"
                      Text="а"
@@ -63,6 +65,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
             <TextBlock Text="Туда"
+                       Foreground="White"
                        HorizontalAlignment="Center"/>
             <DatePicker DisplayDateStart="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}" 
                     SelectedDate="{x:Static sys:DateTime.Now}"
@@ -79,6 +82,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
             <TextBlock Text="Обратно"
+                       Foreground="White"
                        HorizontalAlignment="Center"/>
             <DatePicker x:Name="end"
                         FontSize="16"

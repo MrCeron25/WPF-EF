@@ -9,7 +9,7 @@
       d:DesignWidth="800"
       Title="AirplanesPage">
 
-    <Grid Background="#F07B3F">
+    <Grid Background="#336CC1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -22,11 +22,13 @@
 
 
         <TextBlock Text="Самолёты"
+                   Foreground="White"
                    Grid.Column="1"
                    FontSize="20"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"/>
         <ListView Grid.Row="0"
+                  Background="#9BDBEF"
                   Grid.Column="0"
                   SelectionMode="Single"
                   Margin="10,30,10,10"
@@ -44,11 +46,13 @@
         <Button Content="Добавить"
                 Grid.Row="1"
                 Grid.Column="0"
+                Background="#FFB906"
                 x:Name="AddAirplane"
                 Margin="5,5,5,5"
                 Click="AddAirplane_Click"/>
         <Button Content="Изменить"
                 Grid.Row="1"
+                Background="#FFB906"
                 Grid.Column="1"
                 x:Name="ChangeAirplane"
                 IsEnabled="False"
@@ -56,6 +60,7 @@
                 Click="ChangeAirplane_Click"/>
         <Button Content="Удалить"
                 Grid.Row="1"
+                Background="#FFB906"
                 Grid.Column="2"
                 x:Name="DeleteAirplane"
                 IsEnabled="False"

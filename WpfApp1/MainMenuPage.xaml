@@ -5,16 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
       Title="MainMenuPage">
 
-    <Grid Background="#FFF35656">
+    <Grid Background="#FF104EA9">
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom">
 
             <Button x:Name="LoginPage"
                     FontSize="20"
+                    Background="#FFB906"
                     Margin="10,10,10,10"
                     Content="Вход"
                     Height="30"
@@ -24,6 +26,7 @@
                     FontSize="20"
                     Margin="10,10,10,10"
                     Content="Регистрация"
+                    Background="#FFB906"
                     Height="30"
                     Click="RegistrationPage_Click"/>
 
@@ -31,6 +34,7 @@
                     FontSize="20"
                     Margin="10,10,10,10"
                     Height="30"
+                    Background="#FFB906"
                     Content="Выход"
                     Click="Exit_Click"/>
         </StackPanel>

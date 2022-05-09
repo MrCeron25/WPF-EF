@@ -126,21 +126,12 @@ namespace WpfApp1
                 PassportSeries != null &&
                 Registration != null)
             {
-                bool IsNumberPassportId = false, IsNumberPassportSeries = false;
-                uint BufNumber;
-                IsNumberPassportId = uint.TryParse(PassportId.Text, out BufNumber);
-                IsNumberPassportSeries = uint.TryParse(PassportSeries.Text, out BufNumber);
-                if (IsNumberPassportId &&
+                bool IsNumberPassportId = uint.TryParse(PassportId.Text, out _);
+                bool IsNumberPassportSeries = uint.TryParse(PassportSeries.Text, out _);
+                Registration.IsEnabled = IsNumberPassportId &&
                     IsNumberPassportSeries &&
                     PassportId.Text.Length == 4 &&
-                    PassportSeries.Text.Length == 6)
-                {
-                    Registration.IsEnabled = true;
-                }
-                else
-                {
-                    Registration.IsEnabled = false;
-                }
+                    PassportSeries.Text.Length == 6;
             }
         }
     }

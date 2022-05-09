@@ -298,11 +298,34 @@ insert into tickets(flight_id, seat_number,[user_id]) values
 (14,8, 6),
 (14,15, 3);
 
+GO
+IF EXISTS (SELECT name FROM sysobjects WHERE name = 'GetStatisticsOnSoldTickets' AND type = 'P')
+BEGIN
+   DROP PROCEDURE GetStatisticsOnSoldTickets;
+END
+GO
+
+GO
+CREATE PROCEDURE GetStatisticsOnSoldTickets
+AS
+BEGIN
+	select 
+		year(fl.departure_date) [Год],
+		DATENAME(month, fl.departure_date) [Месяц],
+		sum(fl.price) [Сумма по всем билетам]
+	from tickets ti
+	join flights fl on fl.id = ti.flight_id
+	group by fl.departure_date
+	order by fl.departure_date
+END;
+GO
+
 /*
 select * from users
 select * from system
 select * from tickets
 select * from country
+select * from airplane
 select * from cities
 
 select * from flights

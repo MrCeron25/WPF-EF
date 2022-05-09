@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,30 @@ namespace WpfApp1
         public double Price { get; set; }
     }
 
+    public class FlightInfo
+    {
+        public string FlightName { get; set; }
+        public string DepartureCity { get; set; }
+        public string ArrivalCity { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public TimeSpan TravelTime { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public double Price { get; set; }
+        public string Model { get; set; }
+    }
+
+    public class StatisticOnTickets
+    {
+        public int Year { get; set; }
+        public string Month { get; set; }
+        public double Sum { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Year,8} {Month,8} {Sum,20:n0}";
+        }
+    }
+
     public static class Data
     {
         //public static List<T> GetData<T>(this DbContext contetx) where T : class
@@ -44,6 +69,30 @@ namespace WpfApp1
         //}
 
 
+        public static List<StatisticOnTickets> GetStatistic()
+        {
+            try
+            {
+                List<StatisticOnTickets> data = (
+                     from ti in Manager.Instance.Context.tickets
+                     join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
+                     orderby fl.departure_date
+                     group fl by fl.departure_date into g
+                     select new StatisticOnTickets
+                     {
+                         Year = g.Key.Year,
+                         Month = SqlFunctions.DateName("MM", g.Key),
+                         Sum = g.Sum(fl => fl.price)
+                     }
+                 ).ToList();
+                return data;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
 
 
         public static List<Flight> GetFlights(string FromCity,
@@ -155,7 +204,7 @@ namespace WpfApp1
                     join user in Manager.Instance.Context.users on ti.user_id equals user.id
                     join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
                     join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
-                    where (ti.user_id == SystemUser.user_id)
+                    where ti.user_id == SystemUser.user_id
                     select new Ticket
                     {
                         Id = ti.id,
@@ -174,6 +223,38 @@ namespace WpfApp1
                                        select ci.name).FirstOrDefault(),
                         Name = user.name,
                         Surname = user.surname
+                    }
+                ).ToList();
+                return data;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        public static List<FlightInfo> GetFlights()
+        {
+            try
+            {
+                List<FlightInfo> data = (
+                    from fl in Manager.Instance.Context.flights
+                    join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
+                    select new FlightInfo
+                    {
+                        FlightName = fl.flight_name,
+                        DepartureCity = (from ci in Manager.Instance.Context.cities
+                                         where fl.departure_city == ci.id
+                                         select ci.name).FirstOrDefault(),
+                        ArrivalCity = (from ci in Manager.Instance.Context.cities
+                                       where fl.arrival_city == ci.id
+                                       select ci.name).FirstOrDefault(),
+                        DepartureDate = fl.departure_date,
+                        TravelTime = fl.travel_time,
+                        ArrivalDate = (DateTime)fl.arrival_date,
+                        Price = fl.price,
+                        Model = air.model,
                     }
                 ).ToList();
                 return data;
