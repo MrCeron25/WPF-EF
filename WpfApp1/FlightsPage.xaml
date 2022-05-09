@@ -15,6 +15,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -26,14 +27,15 @@
                    FontSize="20"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"
-                   Grid.ColumnSpan="4"/>
+                   Grid.ColumnSpan="5"/>
 
         <ListView x:Name="Flights"
                   Grid.Row="0"
                   Background="#9BDBEF"
                   SelectionMode="Single"
                   Margin="10,30,10,10" 
-                  Grid.ColumnSpan="4">
+                  SelectionChanged="Flights_SelectionChanged"
+                  Grid.ColumnSpan="5">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding FlightName}" Header="Рейс"/>
@@ -48,31 +50,44 @@
             </ListView.View>
         </ListView>
 
-        <Button Content="Просмотр пассажиров"
-                Grid.Row="1"
-                Background="#FFB906"
-                Grid.Column="0"
-                x:Name="ViewFlights"
-                Margin="5,5,5,5"/>
         <Button Content="Добавить"
                 Grid.Row="1"
                 Background="#FFB906"
-                Grid.Column="1"
+                Grid.Column="0"
                 x:Name="AddFlight"
-                Margin="5,5,5,5"/>
+                Margin="5,5,5,5"
+                Click="AddFlight_Click"/>
         <Button Content="Изменить"
                 Grid.Row="1"
-                Grid.Column="2"
+                Grid.Column="1"
                 Background="#FFB906"
                 x:Name="ChangeFlight"
                 IsEnabled="False"
-                Margin="5,5,5,5"/>
+                Margin="5,5,5,5"
+                Click="ChangeFlight_Click"/>
         <Button Content="Удалить"
                 Grid.Row="1"
-                Grid.Column="3"
+                Grid.Column="2"
                 Background="#FFB906"
                 x:Name="DeleteFlight"
                 IsEnabled="False"
-                Margin="5,5,5,5"/>
+                Margin="5,5,5,5"
+                Click="DeleteFlight_Click"/>
+        <Button Content="Просмотр пассажиров"
+                Grid.Row="1"
+                Background="#FFB906"
+                Grid.Column="3"
+                IsEnabled="False"
+                x:Name="ViewFlights"
+                Margin="5,5,5,5"
+                Click="ViewFlights_Click"/>
+        <Button Content="В архив"
+                Grid.Row="1"
+                Background="#FFB906"
+                Grid.Column="4"
+                IsEnabled="False"
+                x:Name="InArchive"
+                Margin="5,5,5,5"
+                Click="ViewFlights_Click"/>
     </Grid>
 </Page>

@@ -12,7 +12,8 @@
         MaxWidth="300">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="Страна" HorizontalAlignment="Center"
+            <TextBlock Text="Страна" 
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="10,10,10,10"/>
             <TextBox x:Name="CountryName"

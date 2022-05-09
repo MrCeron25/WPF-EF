@@ -298,6 +298,7 @@ insert into tickets(flight_id, seat_number,[user_id]) values
 (14,8, 6),
 (14,15, 3);
 
+/*
 GO
 IF EXISTS (SELECT name FROM sysobjects WHERE name = 'GetStatisticsOnSoldTickets' AND type = 'P')
 BEGIN
@@ -319,6 +320,7 @@ BEGIN
 	order by fl.departure_date
 END;
 GO
+*/
 
 /*
 select * from users

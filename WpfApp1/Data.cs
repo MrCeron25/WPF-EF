@@ -68,6 +68,23 @@ namespace WpfApp1
         //    return data;
         //}
 
+        public static List<cities> GetCities()
+        {
+            try
+            {
+                List<cities> data = (
+                    from city in Manager.Instance.Context.cities
+                    orderby city.name
+                    select city
+                ).ToList();
+                return data;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
 
         public static List<StatisticOnTickets> GetStatistic()
         {
@@ -317,7 +334,7 @@ namespace WpfApp1
             }
         }
 
-        public static List<CountriesWithCities> GetCities()
+        public static List<CountriesWithCities> GetCountriesWithCities()
         {
             try
             {

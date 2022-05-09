@@ -10,7 +10,7 @@ namespace WpfApp1
     {
         private void UpdateCities()
         {
-            Cities.ItemsSource = Data.GetCities();
+            Cities.ItemsSource = Data.GetCountriesWithCities();
         }
 
         private void UpdateCountries()

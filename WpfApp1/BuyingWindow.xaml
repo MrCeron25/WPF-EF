@@ -10,7 +10,7 @@
         Width="800"
         MinHeight="450" 
         MinWidth="800">
-    <Grid Background="#EDB1F1">
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
