@@ -90,8 +90,7 @@ namespace WpfApp1
 
         private void DeleteCountry_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить страну?\nБудут удалены все связанные записи (страны, города, рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
-            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("Вы действительно хотите удалить страну?\nБудут удалены все связанные записи (страны, города, рейсы, билеты).", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -195,8 +194,7 @@ namespace WpfApp1
 
         private void DeleteCity_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить город?\nБудут удалены все связанные записи (города, рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
-            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("Вы действительно хотите удалить город?\nБудут удалены все связанные записи (города, рейсы, билеты).", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
                 {

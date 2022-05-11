@@ -64,7 +64,7 @@
                     Margin="10,10,10,10"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
-            <TextBlock Text="Туда"
+            <TextBlock Text="От"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             <DatePicker DisplayDateStart="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}" 
@@ -81,7 +81,7 @@
                     Margin="10,10,10,10"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
-            <TextBlock Text="Обратно"
+            <TextBlock Text="До"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             <DatePicker x:Name="end"
@@ -117,7 +117,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding FlightId}" Header="№ рейса"/>
                     <GridViewColumn DisplayMemberBinding="{Binding FlightName}" Header="Рейс"/>
                     <GridViewColumn DisplayMemberBinding="{Binding DepartureDate, StringFormat='dd.MM.yyyy HH:mm'}" Header="Время отправления"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding TravelTime, StringFormat='HH:mm'}" Header="Время в пути"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding TravelTime}" Header="Время в пути"/>
                     <GridViewColumn DisplayMemberBinding="{Binding ArrivalDate, StringFormat='dd.MM.yyyy HH:mm'}" Header="Время прибытия"/>
                     <GridViewColumn DisplayMemberBinding="{Binding DepartureCity}" Header="Город вылета"/>
                     <GridViewColumn DisplayMemberBinding="{Binding ArrivalCity}" Header="Город прибытия"/>

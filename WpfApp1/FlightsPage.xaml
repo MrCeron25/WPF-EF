@@ -78,9 +78,9 @@
                 Background="#FFB906"
                 Grid.Column="3"
                 IsEnabled="False"
-                x:Name="ViewFlights"
+                x:Name="ViewPassengers"
                 Margin="5,5,5,5"
-                Click="ViewFlights_Click"/>
+                Click="ViewPassengers_Click"/>
         <Button Content="В архив"
                 Grid.Row="1"
                 Background="#FFB906"
@@ -88,6 +88,6 @@
                 IsEnabled="False"
                 x:Name="InArchive"
                 Margin="5,5,5,5"
-                Click="ViewFlights_Click"/>
+                Click="InArchive_Click"/>
     </Grid>
 </Page>

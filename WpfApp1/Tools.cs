@@ -15,5 +15,25 @@ namespace WpfApp1
             }
             return bools.All(it => it);
         }
+
+        public static TData BinarySearch<TData>(List<TData> data, string key, int left, int right, Func<TData, string> func)
+        {
+            int mid = left + ((right - left) / 2);
+            if (left >= right)
+            {
+                return data[-(1 + left)];
+            }
+
+            if (func.Invoke(data[mid]) == key)
+            {
+                return data[mid];
+            }
+            else
+            {
+                return string.Compare(func.Invoke(data[mid]), key) > 0
+                    ? BinarySearch(data, key, left, mid, func)
+                    : BinarySearch(data, key, mid + 1, right, func);
+            }
+        }
     }
 }

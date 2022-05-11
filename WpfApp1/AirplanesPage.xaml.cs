@@ -90,8 +90,7 @@ namespace WpfApp1
         private void DeleteAirplane_Click(object sender, RoutedEventArgs e)
         {
             airplane SelectedAirplane = Airplanes.SelectedItem as airplane;
-            System.Windows.Forms.DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Вы действительно хотите удалить самолёт?\nБудут удалены все связанные записи (рейсы, билеты).", "Warning", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
-            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("Вы действительно хотите удалить самолёт?\nБудут удалены все связанные записи (рейсы, билеты).", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
                 {

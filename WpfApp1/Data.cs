@@ -55,20 +55,20 @@ namespace WpfApp1
         }
     }
 
+    public class PassengersOnFlight
+    {
+        public long UserId { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Sex { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int PassportSeries { get; set; }
+        public int PassportId { get; set; }
+        public long SeatNumber { get; set; }
+    }
+
     public static class Data
     {
-        //public static List<T> GetData<T>(this DbContext contetx) where T : class
-        //{
-        //    var data = (
-        //        from ticket in
-        //        select ticket
-        //    ).ToList();
-
-        //    Manager.Instance.Context.airplane.AsEnumerable();
-
-        //    return data;
-        //}
-
         public static List<cities> GetCities()
         {
             try
@@ -94,7 +94,6 @@ namespace WpfApp1
                 List<StatisticOnTickets> data = (
                      from ti in Manager.Instance.Context.tickets
                      join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
-                     where fl.is_archive == false
                      orderby fl.departure_date
                      group fl by fl.departure_date into g
                      select new StatisticOnTickets
@@ -112,7 +111,6 @@ namespace WpfApp1
                 return null;
             }
         }
-
 
         public static List<Flight> GetFlights(string FromCity,
                                               string ToCity,
@@ -290,6 +288,37 @@ namespace WpfApp1
             }
         }
 
+        public static List<PassengersOnFlight> GetPassengersOnFlights(long FlightId)
+        {
+            try
+            {
+                List<PassengersOnFlight> data = (
+                    from fl in Manager.Instance.Context.flights
+                    join ti in Manager.Instance.Context.tickets on fl.id equals ti.flight_id
+                    join user in Manager.Instance.Context.users on ti.user_id equals user.id
+                    where fl.is_archive == false &&
+                          fl.id == FlightId
+                    select new PassengersOnFlight
+                    {
+                        UserId = user.id,
+                        Name = user.name,
+                        Surname = user.surname,
+                        Sex = user.sex,
+                        DateOfBirth = user.date_of_birth,
+                        PassportSeries = user.passport_series,
+                        PassportId = user.passport_id,
+                        SeatNumber = ti.seat_number
+                    }
+                ).ToList();
+                return data;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
         public static List<country> GetCountries()
         {
             try
@@ -313,6 +342,7 @@ namespace WpfApp1
             {
                 List<airplane> data = (
                     from airplane_ in Manager.Instance.Context.airplane
+                    orderby airplane_.model
                     select airplane_
                 ).ToList();
                 return data;

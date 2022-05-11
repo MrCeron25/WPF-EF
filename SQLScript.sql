@@ -43,8 +43,9 @@ create table [system](
 
 drop table if exists country;
 create table country(
-	id bigint identity primary key,
-	[name] nvarchar(255) not null unique
+	id bigint identity primary key, 
+	[name] nvarchar(255) not null unique,
+	index idx_countries_name([name]) -- для быстрого поиска
 );
 
 drop table if exists cities;
@@ -52,16 +53,16 @@ create table cities(
 	id bigint identity primary key,
 	[name] nvarchar(255) not null,
 	[country_id] bigint not null,
-	FOREIGN KEY ([country_id]) REFERENCES country (id)
+	FOREIGN KEY ([country_id]) REFERENCES country (id),
+	index idx_cities_name([name]) -- для быстрого поискаw
 );
-
-CREATE INDEX idx_name ON cities ([name]);--для быстрого поиска
 
 drop table if exists airplane;
 create table airplane(
 	id bigint identity primary key,
 	[model] nvarchar(255) not null unique,
 	number_of_seats int not null,
+	index idx_airplanes_model_name([model]) -- для быстрого поиска
 );
 
 -- рейсы
@@ -69,8 +70,8 @@ drop table if exists flights;
 create table flights(
 	id bigint identity primary key,
 	[flight_name] nvarchar(10) not null,
-	[departure_city] bigint,
-	[arrival_city] bigint,
+	[departure_city] bigint not null,
+	[arrival_city] bigint not null,
 	airplane_id bigint not null,
 	[departure_date] datetime not null, 
 	[travel_time] time not null,
@@ -86,7 +87,7 @@ drop table if exists tickets;
 create table tickets(
 	id bigint identity primary key,
 	[flight_id] bigint not null,
-	seat_number bigint not null,
+	seat_number int not null,
 	[user_id] bigint not null,
 	FOREIGN KEY ([flight_id]) REFERENCES flights (id),
 	FOREIGN KEY ([user_id]) REFERENCES users (id)

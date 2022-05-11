@@ -28,11 +28,6 @@ namespace WpfApp1
             UpdateFlights();
         }
 
-        private void ViewFlights_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void AddFlight_Click(object sender, RoutedEventArgs e)
         {
             FlightWindow window = new FlightWindow();
@@ -70,58 +65,57 @@ namespace WpfApp1
             FlightInfo SelectedFlightInfo = Flights.SelectedItem as FlightInfo;
             window.FlightName.Text = SelectedFlightInfo.FlightName;
 
-            foreach (var item in collection)
-            {
-
-            }
+            List<cities> Cities = Data.GetCities();
             //window.DepartureCity.Text = SelectedFlightInfo.DepartureCity;
-            //window.DepartureCity.SelectedItem = Data.GetCities()
-            //                                    .Where(cityName => cityName.name == window.DepartureCity.Text)
-            //                                    .FirstOrDefault();
+            window.DepartureCity.SelectedItem = Tools.BinarySearch(Cities,
+                                                                   SelectedFlightInfo.DepartureCity,
+                                                                   0,
+                                                                   Cities.Count,
+                                                                   item => item.name);
 
             //window.ArrivalCity.Text = SelectedFlightInfo.ArrivalCity;
-            //window.ArrivalCity.SelectedItem = Data.GetCities()
-            //                                  .Where(cityName => cityName.name == window.ArrivalCity.Text)
-            //                                  .FirstOrDefault();
+            window.ArrivalCity.SelectedItem = Tools.BinarySearch(Cities,
+                                                                 SelectedFlightInfo.ArrivalCity,
+                                                                 0,
+                                                                 Cities.Count,
+                                                                 item => item.name);
 
-            window.ArrivalCity.IsEnabled = true;
-            window.DepartureDate.Value = SelectedFlightInfo.DepartureDate;
-            window.TravelTime.Value = SelectedFlightInfo.DepartureDate.Add(SelectedFlightInfo.TravelTime);
-            window.Price.Text = SelectedFlightInfo.Price.ToString("n0");
+            List<airplane> Airplanes = Data.GetAirplanes();
             //window.Airplane.Text = SelectedFlightInfo.Model;
-            if ((bool)window.ShowDialog() && 
-                (window.FlightName.Text != SelectedFlightInfo.FlightName ||
-                window.DepartureCity.Text != SelectedFlightInfo.DepartureCity ||
-                window.ArrivalCity.Text != SelectedFlightInfo.ArrivalCity ||
+            window.Airplane.SelectedItem = Tools.BinarySearch(Airplanes,
+                                                              SelectedFlightInfo.Model,
+                                                              0,
+                                                              Airplanes.Count,
+                                                              item => item.model);
+
+            window.DepartureDate.Value = SelectedFlightInfo.DepartureDate;
+            window.TravelTime.Value = new DateTime().AddSeconds(SelectedFlightInfo.TravelTime.TotalSeconds);
+            window.Price.Text = SelectedFlightInfo.Price.ToString("n0");
+            if ((bool)window.ShowDialog() && (
+                window.FlightName.Text != SelectedFlightInfo.FlightName ||
+                (window.DepartureCity.SelectedItem as cities).name != SelectedFlightInfo.DepartureCity ||
+                (window.ArrivalCity.SelectedItem as cities).name != SelectedFlightInfo.ArrivalCity ||
                 window.DepartureDate.Value.Value != SelectedFlightInfo.DepartureDate ||
                 window.TravelTime.Value.Value.TimeOfDay != SelectedFlightInfo.TravelTime ||
                 double.Parse(window.Price.Text) != SelectedFlightInfo.Price ||
-                window.Airplane.Text != SelectedFlightInfo.Model))
+                (window.Airplane.SelectedItem as airplane).model != SelectedFlightInfo.Model
+                ))
             {
                 try
                 {
                     flights flight = (
                         from fl in Manager.Instance.Context.flights
-                        where fl.id == SelectedFlightInfo.FlightId && 
+                        where fl.id == SelectedFlightInfo.FlightId &&
                               fl.is_archive == false
                         select fl
                     ).ToList()[0];
                     flight.flight_name = window.FlightName.Text;
-                    flight.departure_city = (
-                        from ci in Manager.Instance.Context.cities
-                        where ci.name == window.DepartureCity.Text
-                        select ci
-                    ).ToList()[0].id;
-                    flight.arrival_city = (
-                        from ci in Manager.Instance.Context.cities
-                        where ci.name == window.ArrivalCity.Text
-                        select ci
-                    ).ToList()[0].id;
-                    flight.airplane_id = (
-                        from air in Manager.Instance.Context.airplane
-                        where air.model == window.Airplane.Text
-                        select air
-                    ).ToList()[0].id;
+                    cities SelectedDepartureCity = window.DepartureCity.SelectedItem as cities;
+                    flight.departure_city = SelectedDepartureCity.id;
+                    cities SelectedArrivalCity = window.ArrivalCity.SelectedItem as cities;
+                    flight.arrival_city = SelectedArrivalCity.id;
+                    airplane SelectedAirplane = window.Airplane.SelectedItem as airplane;
+                    flight.airplane_id = SelectedAirplane.id;
                     flight.departure_date = window.DepartureDate.Value.Value;
                     flight.travel_time = window.TravelTime.Value.Value.TimeOfDay;
                     flight.price = double.Parse(window.Price.Text);
@@ -137,26 +131,77 @@ namespace WpfApp1
 
         private void DeleteFlight_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Вы действительно хотите удалить рейс?\nБудут удалены все связанные записи (билеты).", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    FlightInfo flightInfo = Flights.SelectedItem as FlightInfo;
+                    flights SelectedFlight = (
+                        from fl in Manager.Instance.Context.flights
+                        where fl.id == flightInfo.FlightId
+                        select fl
+                    ).ToList()[0];
+                    List<tickets> Tickets = (
+                        from ticket in Manager.Instance.Context.tickets
+                        where ticket.flight_id == SelectedFlight.id
+                        select ticket
+                    ).ToList();
+                    Manager.Instance.Context.tickets.RemoveRange(Tickets);
+                    Manager.Instance.Context.flights.Remove(SelectedFlight);
+                    Manager.Instance.Context.SaveChanges();
+                    UpdateFlights();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void Flights_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Flights.SelectedItem == null)
             {
-                ViewFlights.IsEnabled = false;
-                AddFlight.IsEnabled = false;
+                ViewPassengers.IsEnabled = false;
                 ChangeFlight.IsEnabled = false;
                 DeleteFlight.IsEnabled = false;
                 InArchive.IsEnabled = false;
             }
             else
             {
-                ViewFlights.IsEnabled = true;
-                AddFlight.IsEnabled = true;
+                ViewPassengers.IsEnabled = true;
                 ChangeFlight.IsEnabled = true;
                 DeleteFlight.IsEnabled = true;
                 InArchive.IsEnabled = true;
+            }
+        }
+
+        private void ViewPassengers_Click(object sender, RoutedEventArgs e)
+        {
+            FlightInfo flightInfo = Flights.SelectedItem as FlightInfo;
+            PassengerWindow window = new PassengerWindow(flightInfo.FlightId);
+            try
+            {
+                window.ShowDialog();
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
+
+        private void InArchive_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите перенести рейс в архив?\nЭтот рейс будет скрыт от пользователей.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                FlightInfo SelectedFlightInfo = Flights.SelectedItem as FlightInfo;
+                flights SelectedFlight = (
+                    from fl in Manager.Instance.Context.flights
+                    where fl.id == SelectedFlightInfo.FlightId
+                    select fl
+                ).ToList()[0];
+                SelectedFlight.is_archive = true;
+                Manager.Instance.Context.SaveChanges();
+                UpdateFlights();
             }
         }
     }
