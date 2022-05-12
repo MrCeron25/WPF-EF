@@ -126,6 +126,7 @@
     <Compile Include="FlightWindow.xaml.cs">
       <DependentUpon>FlightWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -177,6 +178,8 @@
     <Compile Include="UserTicketPage.xaml.cs">
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Base\ViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="AdminMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,7 +228,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -233,7 +236,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -296,10 +299,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="reverse.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="image\" />
+    <Folder Include="Data\" />
+    <Folder Include="images\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelDB.Context.tt">
@@ -312,6 +315,7 @@
       <DependentUpon>ModelDB.edmx</DependentUpon>
       <LastGenOutput>ModelDB.cs</LastGenOutput>
     </Content>
+    <Resource Include="Views\Windows\icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

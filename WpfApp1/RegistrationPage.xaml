@@ -66,7 +66,7 @@
                            HorizontalAlignment="Center"
                            FontSize="20"/>
             <TextBox x:Name="PassportId"
-                     Text="1"
+                     Text="1234"
                          Margin="20,20,20,20"
                          FontSize="20" 
                      TextChanged="CheckRegistrationButton"/>
@@ -75,7 +75,7 @@
                            FontSize="20"/>
             <TextBox x:Name="PassportSeries"
                          Margin="20,20,20,20"
-                     Text="1"
+                     Text="123456"
                          FontSize="20"
                      TextChanged="CheckRegistrationButton"/>
         </StackPanel>
@@ -112,7 +112,6 @@
                        FontSize="20"/>
             <Button x:Name="Registration"
                 MaxWidth="300"
-                    IsEnabled="False"
                 Content="Зарегистрироваться"
                 FontSize="20"
                 Margin="10,10,10,10"

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
 
 namespace WpfApp1
 {
@@ -33,6 +36,19 @@ namespace WpfApp1
                 return string.Compare(func.Invoke(data[mid]), key) > 0
                     ? BinarySearch(data, key, left, mid, func)
                     : BinarySearch(data, key, mid + 1, right, func);
+            }
+        }
+
+        public static string GetCrypt(string text)
+        {
+            try
+            {
+                return Convert.ToBase64String(SHA512.Create().ComputeHash(Encoding.UTF8.GetBytes(text)));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Ошибка получения хеш значения.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
         }
     }

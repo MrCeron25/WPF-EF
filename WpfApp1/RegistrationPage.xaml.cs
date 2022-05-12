@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,10 +62,10 @@ namespace WpfApp1
                     try
                     {
                         List<system> FoundUsers = (
-                        from system in Manager.Instance.Context.system
-                        where system.login == Login.Text
-                        select system
-                    ).ToList();
+                            from system in Manager.Instance.Context.system
+                            where system.login == Login.Text
+                            select system
+                        ).ToList();
                         if (FoundUsers.Count > 0)
                         {
                             MessageBox.Show("Логин занят.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -89,9 +90,12 @@ namespace WpfApp1
                                 {
                                     user_id = NewUser.id,
                                     login = Login.Text,
-                                    password = Password.Password,
+                                    password = Tools.GetCrypt(Password.Password),
                                     is_admin = false
                                 };
+
+                                //Console.WriteLine($"{NewSystem.login} {NewSystem.password}\nХЕШ = '{Tools.GetCrypt(NewSystem.password)}'");
+
                                 Manager.Instance.Context.system.Add(NewSystem);
                                 Manager.Instance.Context.SaveChanges();
 

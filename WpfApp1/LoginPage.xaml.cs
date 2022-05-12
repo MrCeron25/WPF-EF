@@ -24,10 +24,29 @@ namespace WpfApp1
                 {
                     List<system> FoundUsers = (
                         from SystemUser in Manager.Instance.Context.system
-                        where (SystemUser.login == Login.Text) && (SystemUser.password == Password.Password)
+                        where SystemUser.login == Login.Text
                         select SystemUser
                     ).ToList();
-                    if (FoundUsers.Count == 0)
+
+                    //List<system> aaa = (
+                    //    from SystemUser in Manager.Instance.Context.system
+                    //    select SystemUser
+                    //).ToList();
+                    //foreach (system user in aaa)
+                    //{
+                    //    string pass = Tools.GetCrypt(user.password);
+                    //    user.password = pass;
+                    //}
+                    //Manager.Instance.Context.SaveChanges();
+                    //foreach (system user in aaa)
+                    //{
+                    //    Console.WriteLine($"({user.user_id}, '{user.login}', '{user.password.Replace("\'", "\'\'")}', {(user.is_admin ? '1' : '0')}),\n");
+                    //}
+
+                    string CryptPassword = Tools.GetCrypt(Password.Password);
+                    bool UserIsFound = FoundUsers.Count == 1 &&
+                                       FoundUsers[0].password == CryptPassword;
+                    if (!UserIsFound)
                     {
                         MessageBox.Show("Неверный логин или пароль.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
