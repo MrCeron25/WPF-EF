@@ -4,5 +4,11 @@
              xmlns:local="clr-namespace:WpfApp1"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="ButtonTemplate" TargetType="Button">
+            <Setter Property="Margin" Value="10,10,10,10"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="#FFB906"/>
+        </Style>
     </Application.Resources>
 </Application>
