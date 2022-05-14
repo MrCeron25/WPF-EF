@@ -10,5 +10,33 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="#FFB906"/>
         </Style>
+
+        <Style x:Key="TextBlockTemplate" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#66FF00"/>
+        </Style>
+
+        <Style x:Key="TextBoxTemplate" TargetType="TextBox">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20,20,20,20"/>
+        </Style>
+
+        <Style x:Key="PasswordBoxTemplate" TargetType="PasswordBox">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20,20,20,20"/>
+        </Style>
+
+        <Style x:Key="AuthorTemplate" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Text" Value="Алексеева Артёма ПКС-305"/>
+        </Style>
     </Application.Resources>
 </Application>

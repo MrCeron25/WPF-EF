@@ -8,6 +8,7 @@ namespace WpfApp1.ViewModels
     class MainMenuViewModel : ViewModel
     {
         #region Вход
+
         private string _EntryButtonName = "Вход";
 
         /// <summary>
@@ -53,9 +54,9 @@ namespace WpfApp1.ViewModels
 
         public ICommand CloseApplicationCommand { get; }
 
-        private bool CanCloseApplicationCommandExecute(object p) => true;
+        private bool CanCloseApplicationCommandExecute(object parameters) => true;
 
-        private void OnCloseApplicationCommandExecuted(object p)
+        private void OnCloseApplicationCommandExecuted(object parameters)
         {
             Application.Current.Shutdown();
         }
@@ -64,9 +65,9 @@ namespace WpfApp1.ViewModels
 
         public ICommand EntryCommand { get; }
 
-        private bool CanEntryCommandExecute(object p) => true;
+        private bool CanEntryCommandExecute(object parameters) => true;
 
-        private void OnEntryCommandExecuted(object p)
+        private void OnEntryCommandExecuted(object parameters)
         {
             Manager.Instance.MainFrame.Navigate(new LoginPage());
         }

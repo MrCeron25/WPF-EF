@@ -308,6 +308,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="login_background.jpg" />
+    <Resource Include="login_airplane_icon.jpg" />
     <Content Include="ModelDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
