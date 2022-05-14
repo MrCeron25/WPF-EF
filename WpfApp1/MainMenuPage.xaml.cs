@@ -22,7 +22,7 @@ namespace WpfApp1
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.Instance.MainWindow.Close();
+            Application.Current.Shutdown();
         }
     }
 }

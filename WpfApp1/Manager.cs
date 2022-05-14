@@ -10,16 +10,12 @@ namespace WpfApp1
         {
             get
             {
-                if (_INSTANCE == null)
-                {
-                    _INSTANCE = new Manager();
-                }
+                if (_INSTANCE == null) _INSTANCE = new Manager();
                 return _INSTANCE;
             }
         }
 
         public course_work_WPF_EFEntities1 Context { get; set; }
-        public MainWindow MainWindow { get; set; }
         public Frame MainFrame { get; set; }
         public Frame MenuFrame { get; set; }
     }

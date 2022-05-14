@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WpfApp1.ViewModels.Base;
 
 namespace WpfApp1.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
-        private string _Tiile = "Альта";
-
         #region Заголовок
+        private string _Tiile = "Альта";
 
         /// <summary>
         /// Заголовок
@@ -23,7 +23,5 @@ namespace WpfApp1.ViewModels
         }
 
         #endregion
-
-
     }
 }
