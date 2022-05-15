@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using WpfApp1.Models;
 
 namespace WpfApp1
 {

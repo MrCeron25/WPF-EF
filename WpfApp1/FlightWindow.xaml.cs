@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
+using WpfApp1.Models;
 
 namespace WpfApp1
 {

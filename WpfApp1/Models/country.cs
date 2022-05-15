@@ -7,29 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp1
+namespace WpfApp1.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class users
+    public partial class country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public users()
+        public country()
         {
-            this.tickets = new HashSet<tickets>();
+            this.cities = new HashSet<cities>();
         }
     
         public long id { get; set; }
         public string name { get; set; }
-        public string surname { get; set; }
-        public string sex { get; set; }
-        public System.DateTime date_of_birth { get; set; }
-        public int passport_series { get; set; }
-        public int passport_id { get; set; }
     
-        public virtual system system { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tickets> tickets { get; set; }
+        public virtual ICollection<cities> cities { get; set; }
     }
 }

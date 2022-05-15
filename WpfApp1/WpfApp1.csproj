@@ -86,7 +86,7 @@
     <Compile Include="AdminMenuPage.xaml.cs">
       <DependentUpon>AdminMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="airplane.cs">
+    <Compile Include="Models\airplane.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="AirplanesPage.xaml.cs">
@@ -101,7 +101,7 @@
     <Compile Include="BuyingWindow.xaml.cs">
       <DependentUpon>BuyingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="cities.cs">
+    <Compile Include="Models\cities.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="CitiesAndCountriesPage.xaml.cs">
@@ -110,14 +110,14 @@
     <Compile Include="CityWindow.xaml.cs">
       <DependentUpon>CityWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="country.cs">
+    <Compile Include="Models\country.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="CountryWindow.xaml.cs">
       <DependentUpon>CountryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="flights.cs">
+    <Compile Include="Models\flights.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="FlightsPage.xaml.cs">
@@ -128,24 +128,25 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="Views\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs" />
-    <Compile Include="ModelDB.Context.cs">
+    <Compile Include="Models\ModelDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDB.cs">
+    <Compile Include="Models\ModelDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelDB.Designer.cs">
+    <Compile Include="Models\ModelDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDB.edmx</DependentUpon>
@@ -157,30 +158,30 @@
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Saver.cs" />
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="system.cs">
+    <Compile Include="Models\system.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="tickets.cs">
+    <Compile Include="Models\tickets.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="UserMenuPage.xaml.cs">
       <DependentUpon>UserMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegistrationPage.xaml.cs">
+    <Compile Include="Views\Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="users.cs">
+    <Compile Include="Models\users.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="UserTicketPage.xaml.cs">
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Base\ViewModel.cs" />
-    <Compile Include="ViewModels\LoginPageViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="AdminMenuPage.xaml">
@@ -223,7 +224,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginPage.xaml">
+    <Page Include="Views\Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,7 +256,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegistrationPage.xaml">
+    <Page Include="Views\Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -282,11 +283,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ModelDB.edmx">
+    <EntityDeploy Include="Models\ModelDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelDB.edmx.diagram">
+    <None Include="Models\ModelDB.edmx.diagram">
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -304,18 +305,17 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="images\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="login_background.jpg" />
-    <Resource Include="login_airplane_icon.jpg" />
-    <Content Include="ModelDB.Context.tt">
+    <Resource Include="Views\Pages\reg_icon.jpg" />
+    <Resource Include="Views\Pages\login_airplane_icon.jpg" />
+    <Content Include="Models\ModelDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Content>
-    <Content Include="ModelDB.tt">
+    <Content Include="Models\ModelDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelDB.edmx</DependentUpon>
       <LastGenOutput>ModelDB.cs</LastGenOutput>

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using WpfApp1.Infrastructure.Commands;
+using WpfApp1.Models;
 using WpfApp1.ViewModels.Base;
 
 namespace WpfApp1.ViewModels
 {
-    class LoginPageViewModel : ViewModel
+    internal class LoginViewModel : ViewModel
     {
         #region Заголовок Вход в систему
 
@@ -130,21 +131,6 @@ namespace WpfApp1.ViewModels
                         select SystemUser
                     ).ToList();
 
-                    //List<system> aaa = (
-                    //    from SystemUser in Manager.Instance.Context.system
-                    //    select SystemUser
-                    //).ToList();
-                    //foreach (system user in aaa)
-                    //{
-                    //    string pass = Tools.GetCrypt(user.password);
-                    //    user.password = pass;
-                    //}
-                    //Manager.Instance.Context.SaveChanges();
-                    //foreach (system user in aaa)
-                    //{
-                    //    Console.WriteLine($"({user.user_id}, '{user.login}', '{user.password.Replace("\'", "\'\'")}', {(user.is_admin ? '1' : '0')}),\n");
-                    //}
-
                     bool UserIsFound = FoundUsers.Count == 1 &&
                                        FoundUsers[0].password == Tools.GetCrypt(Password);
                     if (!UserIsFound)
@@ -182,7 +168,7 @@ namespace WpfApp1.ViewModels
         #endregion
 
         #region Конструктор
-        public LoginPageViewModel()
+        public LoginViewModel()
         {
             RegistrationCommand = new LambdaCommand(OnRegistrationCommandExecuted, CanRegistrationCommandExecute);
             EntryCommand = new LambdaCommand(OnEntryCommandExecuted, CanEntryCommandExecute);

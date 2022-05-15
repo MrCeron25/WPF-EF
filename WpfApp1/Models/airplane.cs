@@ -7,34 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp1
+namespace WpfApp1.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class flights
+    public partial class airplane
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public flights()
+        public airplane()
         {
-            this.tickets = new HashSet<tickets>();
+            this.flights = new HashSet<flights>();
         }
     
         public long id { get; set; }
-        public string flight_name { get; set; }
-        public Nullable<long> departure_city { get; set; }
-        public Nullable<long> arrival_city { get; set; }
-        public long airplane_id { get; set; }
-        public System.DateTime departure_date { get; set; }
-        public System.TimeSpan travel_time { get; set; }
-        public Nullable<System.DateTime> arrival_date { get; set; }
-        public double price { get; set; }
-        public bool is_archive { get; set; }
+        public string model { get; set; }
+        public int number_of_seats { get; set; }
     
-        public virtual airplane airplane { get; set; }
-        public virtual cities cities { get; set; }
-        public virtual cities cities1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tickets> tickets { get; set; }
+        public virtual ICollection<flights> flights { get; set; }
     }
 }

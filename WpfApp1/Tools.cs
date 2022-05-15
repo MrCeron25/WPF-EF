@@ -51,5 +51,14 @@ namespace WpfApp1
                 return null;
             }
         }
+
+        public bool CheckPassword(string password)
+        {
+            char[] specialCharactersArray = "%!@#$%^&*()?/>.<,:;'\\|}]{[_~`+=-\"".ToCharArray();
+            return password.Length >= 8 &&
+                   password.Any(char.IsUpper) &&
+                   password.Any(char.IsLower) &&
+                   password.Any(specialCharactersArray.Contains);
+        }
     }
 }

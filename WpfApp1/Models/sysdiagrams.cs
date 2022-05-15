@@ -7,24 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp1
+namespace WpfApp1.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class airplane
+    public partial class sysdiagrams
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public airplane()
-        {
-            this.flights = new HashSet<flights>();
-        }
-    
-        public long id { get; set; }
-        public string model { get; set; }
-        public int number_of_seats { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<flights> flights { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
