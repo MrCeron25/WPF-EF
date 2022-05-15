@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
+using System.Linq;
 using System.Windows.Input;
 using WpfApp1.Infrastructure.Commands;
 using WpfApp1.Models;
@@ -35,11 +35,11 @@ namespace WpfApp1.ViewModels
 
         #region Текст имени
 
-        private string _NameText = "1";
-        public string NameText
+        private string _Name = "1";
+        public string Name
         {
-            get => _NameText;
-            set => Set(ref _NameText, value);
+            get => _Name;
+            set => Set(ref _Name, value);
         }
 
         #endregion
@@ -57,11 +57,11 @@ namespace WpfApp1.ViewModels
 
         #region Текст Фамилии
 
-        private string _SurnameText = "1";
-        public string SurnameText
+        private string _Surname = "1";
+        public string Surname
         {
-            get => _SurnameText;
-            set => Set(ref _SurnameText, value);
+            get => _Surname;
+            set => Set(ref _Surname, value);
         }
 
         #endregion
@@ -121,7 +121,6 @@ namespace WpfApp1.ViewModels
 
         #endregion
 
-
         #region Заголовок Номер паспорта
 
         private string _PassportIdTitleText = "Номер паспорта";
@@ -143,7 +142,6 @@ namespace WpfApp1.ViewModels
         }
 
         #endregion
-
 
         #region Заголовок Серия паспорта
 
@@ -200,6 +198,17 @@ namespace WpfApp1.ViewModels
 
         #endregion
 
+        #region Ссылка на страницу входа
+
+        private string _EntryLink = "Вход";
+        public string EntryLink
+        {
+            get => _EntryLink;
+            set => Set(ref _EntryLink, value);
+        }
+
+        #endregion
+
         #region Команды
 
         public ICommand RegistrationCommand { get; }
@@ -208,17 +217,111 @@ namespace WpfApp1.ViewModels
 
         private void OnRegistrationCommandExecuted(object parameters)
         {
-            string Password = parameters as string;
-            
+            var items = (object[])parameters;
+            string Password = items[0] as string;
+            string Sex = items[1] as string;
+            if (!Tools.CheckStrings(string.IsNullOrEmpty,
+                                    Name,
+                                    Surname,
+                                    PassportId,
+                                    PassportSeries,
+                                    Login,
+                                    Password))
+            {
+                if (uint.TryParse(PassportId, out _) &&
+                    uint.TryParse(PassportSeries, out _) &&
+                    PassportId.Length == 4 &&
+                    PassportSeries.Length == 6)
+                {
+                    if (Tools.CheckPassword(Password))
+                    {
+                        try
+                        {
+                            List<system> FoundUsers = (
+                                from system in Manager.Instance.Context.system
+                                where system.login == Login
+                                select system
+                            ).ToList();
+                            if (FoundUsers.Count > 0)
+                            {
+                                MessageBox.Show("Логин занят.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    users NewUser = new users
+                                    {
+                                        name = Name,
+                                        surname = Surname,
+                                        sex = Sex.Substring(0, 1),
+                                        date_of_birth = DateOfBirth,
+                                        passport_id = int.Parse(PassportId),
+                                        passport_series = int.Parse(PassportSeries),
+                                    };
+                                    Manager.Instance.Context.users.Add(NewUser);
+                                    Manager.Instance.Context.SaveChanges();
+
+                                    system NewSystem = new system
+                                    {
+                                        user_id = NewUser.id,
+                                        login = Login,
+                                        password = Tools.GetCrypt(Password),
+                                        is_admin = false
+                                    };
+                                    Manager.Instance.Context.system.Add(NewSystem);
+                                    Manager.Instance.Context.SaveChanges();
+
+                                    MessageBox.Show("Вы зарегистрированы.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    Manager.Instance.MainFrame.Navigate(new LoginPage());
+                                }
+                                catch (Exception error)
+                                {
+                                    MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show($"{error.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Слишком лёгкий пароль.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Серия паспорта и Номер паспорта должны иметь только числа (6 и 4 соответственно).", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля ввода.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        public ICommand EntryLinkCommand { get; }
+
+        private bool CanEntryLinkExecute(object parameters) => true;
+
+        private void OnEntryLinkExecuted(object parameters)
+        {
+            Manager.Instance.MainFrame.Navigate(new LoginPage());
         }
 
         #endregion
 
+
         #region Конструктор
+
         public RegistrationViewModel()
         {
             RegistrationCommand = new LambdaCommand(OnRegistrationCommandExecuted, CanRegistrationCommandExecute);
+            EntryLinkCommand = new LambdaCommand(OnEntryLinkExecuted, CanEntryLinkExecute);
         }
+
         #endregion
     }
 }

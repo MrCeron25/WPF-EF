@@ -8,11 +8,16 @@
       d:DesignHeight="450" 
       d:DesignWidth="800"
       xmlns:vm="clr-namespace:WpfApp1.ViewModels"
+      xmlns:converter="clr-namespace:WpfApp1.Resources"
       Title="RegistrationPage">
 
     <Page.DataContext>
         <vm:RegistrationViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <converter:ArrayMultiValueConverter x:Key="Converter"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,7 +27,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <Grid.Background>
@@ -38,13 +43,13 @@
                        FontSize="20"
                        Style="{StaticResource TextBlockTemplate}"/>
             <TextBox x:Name="Name"
-                     Text="{Binding NameText}"
+                     Text="{Binding Name}"
                      Style="{StaticResource TextBoxTemplate}"/>
             <TextBlock Text="{Binding SurnameTitleText}"
                        Style="{StaticResource TextBlockTemplate}"
                        FontSize="20"/>
             <TextBox x:Name="Surname"
-                     Text="{Binding SurnameText}"
+                     Text="{Binding Surname}"
                      Style="{StaticResource TextBoxTemplate}"/>
             <TextBlock Text="{Binding SexTitleText}"
                        Style="{StaticResource TextBlockTemplate}"
@@ -103,15 +108,25 @@
         <StackPanel Orientation="Vertical"
                     Grid.Row="1"
                     Grid.Column="1">
-            <TextBlock Text="Вход"
-                       PreviewMouseDown="TextBlock_PreviewMouseDown"
-                       Foreground="Blue"
+            <TextBlock Text="{Binding EntryLink}"
                        TextDecorations="Underline"
-                       HorizontalAlignment="Center"
-                       FontSize="20"/>
+                       Style="{StaticResource TextBlockTemplate}">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding EntryLinkCommand}"
+                                  MouseAction="LeftClick"/>
+                </TextBlock.InputBindings>
+            </TextBlock>
             <Button Style="{StaticResource ButtonTemplate}"
+                    Margin="20,20,20,20"
                     Content="{Binding RegistrationButtonName}"
-                    Command="{Binding RegistrationCommand}"/>
+                    Command="{Binding RegistrationCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource Converter}">
+                        <Binding Path="Password" ElementName="Password"/>
+                        <Binding Path="SelectedItem.Content" ElementName="Sex"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
         </StackPanel>
         <TextBlock Style="{StaticResource AuthorTemplate}"
                    Grid.Column="2"

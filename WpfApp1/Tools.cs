@@ -52,7 +52,7 @@ namespace WpfApp1
             }
         }
 
-        public bool CheckPassword(string password)
+        public static bool CheckPassword(string password)
         {
             char[] specialCharactersArray = "%!@#$%^&*()?/>.<,:;'\\|}]{[_~`+=-\"".ToCharArray();
             return password.Length >= 8 &&

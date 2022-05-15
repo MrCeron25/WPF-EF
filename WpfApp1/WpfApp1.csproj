@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
+    <Compile Include="Resources\ArrayMultiValueConverter.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Views\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -305,7 +306,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="images\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Pages\reg_icon.jpg" />
