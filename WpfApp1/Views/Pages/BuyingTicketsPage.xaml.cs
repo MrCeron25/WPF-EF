@@ -17,19 +17,12 @@ namespace WpfApp1
             end.DisplayDateStart = start.SelectedDate;
         }
 
-        private void Reverse_MouseDown(object sender, MouseEventArgs e)
-        {
-            string buf = to.Text;
-            to.Text = from.Text;
-            from.Text = buf;
-        }
-
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             Viewing.IsEnabled = false;
             if (!Tools.CheckStrings(string.IsNullOrEmpty,
-                                    from.Text,
-                                    to.Text))
+                                    DepartureCity.Text,
+                                    ArrivalCity.Text))
             {
                 if (!string.IsNullOrEmpty(start.Text))
                 {
@@ -38,14 +31,14 @@ namespace WpfApp1
                     if (string.IsNullOrEmpty(end.Text))
                     {
                         // пуста
-                        data = Data.GetFlights(from.Text,
-                                               to.Text,
+                        data = Data.GetFlights(DepartureCity.Text,
+                                               ArrivalCity.Text,
                                                start.SelectedDate.Value);
                     }
                     else
                     {
-                        data = Data.GetFlights(from.Text,
-                                               to.Text,
+                        data = Data.GetFlights(DepartureCity.Text,
+                                               ArrivalCity.Text,
                                                start.SelectedDate.Value,
                                                end.SelectedDate.Value);
                     }
@@ -68,13 +61,13 @@ namespace WpfApp1
             }
         }
 
-        private void start_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (end != null)
-            {
-                end.DisplayDateStart = start.SelectedDate;
-            }
-        }
+        //private void start_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (end != null)
+        //    {
+        //        end.DisplayDateStart = start.SelectedDate;
+        //    }
+        //}
 
         private void Tickets_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

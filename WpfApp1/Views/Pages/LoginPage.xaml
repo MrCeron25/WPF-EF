@@ -37,7 +37,7 @@
             <TextBlock Text="{Binding PasswordName}" 
                        FontSize="20"
                        Style="{StaticResource TextBlockTemplate}"/>
-            <PasswordBox Password="2"
+            <PasswordBox Password="1"
                          x:Name="Password"
                          TextBlock.TextAlignment="Center"
                          Style="{StaticResource PasswordBoxTemplate}"/>

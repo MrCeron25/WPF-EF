@@ -392,18 +392,17 @@ namespace WpfApp1
             }
         }
 
-        private static List<long> GetOccupiedSeats(long FlightId)
+        private static IQueryable<long> GetOccupiedSeats(long FlightId)
         {
             try
             {
-                List<long> data = (
+                return (
                     from fl in Manager.Instance.Context.flights
                     join ti in Manager.Instance.Context.tickets on fl.id equals ti.flight_id
                     where fl.id == FlightId &&
                           fl.is_archive == false
                     select ti.seat_number
-                 ).ToList();
-                return data;
+                 );
             }
             catch (Exception error)
             {
@@ -414,9 +413,9 @@ namespace WpfApp1
 
         public static List<long> GetFreeSeats(long FlightId, long numberOfSeat)
         {
-            List<long> occupiedPlaces = GetOccupiedSeats(FlightId);
+            var occupiedPlaces = GetOccupiedSeats(FlightId);
             List<long> res = new List<long>();
-            for (uint i = 1; i <= numberOfSeat; i++)
+            for (long i = 1; i <= numberOfSeat; i++)
             {
                 if (!occupiedPlaces.Contains(i))
                 {

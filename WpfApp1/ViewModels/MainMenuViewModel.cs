@@ -1,7 +1,9 @@
 ﻿using System.Windows.Input;
 using WpfApp1.ViewModels.Base;
+using System.Linq;
 using WpfApp1.Infrastructure.Commands;
 using System.Windows;
+using System.Threading;
 
 namespace WpfApp1.ViewModels
 {
@@ -85,6 +87,19 @@ namespace WpfApp1.ViewModels
 
         #endregion
 
+        #region Test Connect
+
+        /// <summary>
+        /// Для ускорения загрузки данных для EF
+        /// </summary>
+        private void TestConnect()
+        {
+            var data = from system in Manager.Instance.Context.system
+                       select system;
+        }
+
+        #endregion
+
         #region Конструктор
 
         public MainMenuViewModel()
@@ -92,6 +107,8 @@ namespace WpfApp1.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             EntryCommand = new LambdaCommand(OnEntryCommandExecuted, CanEntryCommandExecute);
             RegistrationCommand = new LambdaCommand(OnRegistrationCommandExecuted, CanRegistrationCommandExecute);
+            Thread testConnect = new Thread(TestConnect);
+            testConnect.Start();
         }
 
         #endregion

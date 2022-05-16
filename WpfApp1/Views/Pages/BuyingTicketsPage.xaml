@@ -5,10 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:System="clr-namespace:System;assembly=mscorlib"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
-      xmlns:local="clr-namespace:WpfApp1"
+      xmlns:vm="clr-namespace:WpfApp1.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="670" d:DesignWidth="800"
+      d:DesignHeight="670" 
+      d:DesignWidth="800"
       Title="BuyingTicketsPage">
+
+    <Page.DataContext>
+        <vm:BuyingTicketsViewModel/>
+    </Page.DataContext>
 
     <Grid Background="#11999E">
         <Grid.ColumnDefinitions>
@@ -25,67 +30,67 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" 
-                    Grid.Column="0"
+        <StackPanel Grid.Column="0"
                     Grid.Row="0"
-                    Margin="10,10,10,10"
-                    VerticalAlignment="Center">
-            <TextBlock Text="Город вылета" 
+                    Style="{StaticResource StackPanelTemplate}">
+            <TextBlock Text="{Binding DepartureCityTitle}" 
+                       FontSize="15"
                        Foreground="White"
-                       HorizontalAlignment="Center"/>
-            <TextBox x:Name="from"
-                     HorizontalContentAlignment="Center"
-                     Text="а"
-                     FontSize="20"/>
+                       Style="{StaticResource TextBlockTemplate}"/>
+            <TextBox x:Name="DepartureCity"
+                     Text="{Binding DepartureCity}"
+                     Style="{StaticResource TextBoxTemplate}"
+                     Foreground="Black"
+                     Margin="0,0,0,0"/>
         </StackPanel>
 
         <Image Source="reverse.jpg"
                Grid.Column="1"
-               Grid.Row="0"
-               MouseDown="Reverse_MouseDown"/>
+               Grid.Row="0">
+            <Image.InputBindings>
+                <MouseBinding Command="{Binding ReverseTextCommand}"
+                              MouseAction="LeftClick"/>
+            </Image.InputBindings>
+        </Image>
 
-        <StackPanel Orientation="Vertical" 
-                    Grid.Column="2"
+        <StackPanel Grid.Column="2"
                     Grid.Row="0"
-                    Margin="10,10,10,10"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center">
-            <TextBlock Text="Город прилёта"
+                    Style="{StaticResource StackPanelTemplate}">
+            <TextBlock Text="{Binding ArrivalCityTitle}"
+                       FontSize="15"
                        Foreground="White"
-                       HorizontalAlignment="Center"/>
-            <TextBox x:Name="to"
-                     Text="а"
-                     HorizontalContentAlignment="Center"
-                     FontSize="20"/>
+                       Style="{StaticResource TextBlockTemplate}"/>
+            <TextBox x:Name="ArrivalCity"
+                     Text="{Binding ArrivalCity}"
+                     Style="{StaticResource TextBoxTemplate}"
+                     Foreground="Black"
+                     Margin="0,0,0,0"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" 
-                    Grid.Column="3"
-                    Grid.Row="0"
-                    Margin="10,10,10,10"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center">
-            <TextBlock Text="От"
+        <StackPanel Grid.Column="3"
+                    Grid.Row="0" 
+                    Style="{StaticResource StackPanelTemplate}">
+            <TextBlock Text="{Binding StartDateTitle}" 
+                       FontSize="15"
                        Foreground="White"
-                       HorizontalAlignment="Center"/>
-            <DatePicker DisplayDateStart="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}" 
-                    SelectedDate="{x:Static sys:DateTime.Now}"
-                    x:Name="start"
-                    FontSize="16"
-                    MaxWidth="120"
-                    SelectedDateChanged="start_SelectedDateChanged"/>
+                       Style="{StaticResource TextBlockTemplate}"/>
+            <DatePicker DisplayDateStart="{Binding StartDateDisplayDateStart}" 
+                        SelectedDate="{Binding StartDate}"
+                        x:Name="start"
+                        FontSize="16"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" 
-                    Grid.Column="4"
+        <StackPanel Grid.Column="4"
                     Grid.Row="0"
-                    Margin="10,10,10,10">
-            <TextBlock Text="До"
+                    Style="{StaticResource StackPanelTemplate}">
+            <TextBlock Text="{Binding EndDateTitle}"
+                       FontSize="15"
                        Foreground="White"
-                       HorizontalAlignment="Center"/>
+                       Style="{StaticResource TextBlockTemplate}"/>
             <DatePicker x:Name="end"
-                        FontSize="16"
-                        MaxWidth="120"/>
+                        SelectedDate="{Binding EndDate}"
+                        DisplayDateStart="{Binding StartDate}"
+                        FontSize="16"/>
         </StackPanel>
 
         <Button Content="Найти"

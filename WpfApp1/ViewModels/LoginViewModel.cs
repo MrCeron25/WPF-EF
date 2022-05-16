@@ -89,7 +89,7 @@ namespace WpfApp1.ViewModels
 
         #region Текст Логина
 
-        private string _Login = "2";
+        private string _Login = "1";
 
         /// <summary>
         /// Текст Логина
