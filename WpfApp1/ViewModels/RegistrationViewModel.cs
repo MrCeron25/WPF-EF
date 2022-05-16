@@ -6,6 +6,7 @@ using System.Windows.Input;
 using WpfApp1.Infrastructure.Commands;
 using WpfApp1.Models;
 using WpfApp1.ViewModels.Base;
+using System.Windows.Controls;
 
 namespace WpfApp1.ViewModels
 {
@@ -218,7 +219,8 @@ namespace WpfApp1.ViewModels
         private void OnRegistrationCommandExecuted(object parameters)
         {
             var items = (object[])parameters;
-            string Password = items[0] as string;
+            var passwordBox = items[0] as PasswordBox;
+            var Password = passwordBox.Password;
             string Sex = items[1] as string;
             if (!Tools.CheckStrings(string.IsNullOrEmpty,
                                     Name,
@@ -312,7 +314,6 @@ namespace WpfApp1.ViewModels
         }
 
         #endregion
-
 
         #region Конструктор
 

@@ -29,12 +29,12 @@
                     Grid.Column="0"
                     Grid.Row="0"
                     Margin="10,10,10,10"
-                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
             <TextBlock Text="Город вылета" 
                        Foreground="White"
                        HorizontalAlignment="Center"/>
             <TextBox x:Name="from"
+                     HorizontalContentAlignment="Center"
                      Text="а"
                      FontSize="20"/>
         </StackPanel>
@@ -55,6 +55,7 @@
                        HorizontalAlignment="Center"/>
             <TextBox x:Name="to"
                      Text="а"
+                     HorizontalContentAlignment="Center"
                      FontSize="20"/>
         </StackPanel>
 
@@ -78,9 +79,7 @@
         <StackPanel Orientation="Vertical" 
                     Grid.Column="4"
                     Grid.Row="0"
-                    Margin="10,10,10,10"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center">
+                    Margin="10,10,10,10">
             <TextBlock Text="До"
                        Foreground="White"
                        HorizontalAlignment="Center"/>

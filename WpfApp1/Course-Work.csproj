@@ -95,7 +95,8 @@
     <Compile Include="AirplaneWindow.xaml.cs">
       <DependentUpon>AirplaneWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuyingTicketsPage.xaml.cs">
+    <Compile Include="ViewModels\BuyingTicketsViewModel.cs" />
+    <Compile Include="Views\Pages\BuyingTicketsPage.xaml.cs">
       <DependentUpon>BuyingTicketsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="BuyingWindow.xaml.cs">
@@ -197,7 +198,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuyingTicketsPage.xaml">
+    <Page Include="Views\Pages\BuyingTicketsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -308,6 +309,7 @@
     <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Views\Pages\reverse.jpg" />
     <Resource Include="Views\Pages\reg_icon.jpg" />
     <Resource Include="Views\Pages\login_airplane_icon.jpg" />
     <Content Include="Models\ModelDB.Context.tt">

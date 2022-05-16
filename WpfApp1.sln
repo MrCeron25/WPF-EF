@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{0C42111C-2B9B-47E8-B168-4A803C0AF1C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Course-Work", "WpfApp1\Course-Work.csproj", "{0C42111C-2B9B-47E8-B168-4A803C0AF1C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

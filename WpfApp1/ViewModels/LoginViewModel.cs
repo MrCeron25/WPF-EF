@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApp1.Infrastructure.Commands;
 using WpfApp1.Models;
@@ -120,7 +121,8 @@ namespace WpfApp1.ViewModels
 
         private void OnEntryCommandExecuted(object parameters)
         {
-            string Password = parameters as string;
+            var passwordBox = parameters as PasswordBox;
+            var Password = passwordBox.Password;
             if (!Tools.CheckStrings(string.IsNullOrEmpty, Login, Password))
             {
                 try
@@ -131,8 +133,9 @@ namespace WpfApp1.ViewModels
                         select SystemUser
                     ).ToList();
 
+                    string CryptPassword = Tools.GetCrypt(Password);
                     bool UserIsFound = FoundUsers.Count == 1 &&
-                                       FoundUsers[0].password == Tools.GetCrypt(Password);
+                                       FoundUsers[0].password == CryptPassword;
                     if (!UserIsFound)
                     {
                         MessageBox.Show("Неверный логин или пароль.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -140,8 +143,6 @@ namespace WpfApp1.ViewModels
                     else
                     {
                         system user = FoundUsers[0];
-                        Login = "";
-                        Password = "";
                         if (user.is_admin)
                         {
                             Manager.Instance.MainFrame.Navigate(new CitiesAndCountriesPage());

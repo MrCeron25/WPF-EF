@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       xmlns:vm="clr-namespace:WpfApp1.ViewModels"
+      xmlns:converter="clr-namespace:WpfApp1.Resources"
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="LoginPage">
@@ -12,7 +13,11 @@
     <Page.DataContext>
         <vm:LoginViewModel/>
     </Page.DataContext>
-    
+
+    <Page.Resources>
+        <converter:ArrayMultiValueConverter x:Key="Converter"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="login_airplane_icon.jpg"/>
@@ -20,7 +25,8 @@
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
-                    MinWidth="300">
+                    MinWidth="300"
+                    MaxWidth="300">
             <TextBlock Text="{Binding LoginTitle}"
                        Style="{StaticResource TextBlockTemplate}"/>
             <TextBlock Text="{Binding LoginName}" 
@@ -33,6 +39,7 @@
                        Style="{StaticResource TextBlockTemplate}"/>
             <PasswordBox Password="2"
                          x:Name="Password"
+                         TextBlock.TextAlignment="Center"
                          Style="{StaticResource PasswordBoxTemplate}"/>
             <TextBlock Text="{Binding RegistrationLink}"
                        TextDecorations="Underline"
@@ -46,7 +53,7 @@
                     Style="{StaticResource ButtonTemplate}"
                     Margin="20,20,20,20"
                     Command="{Binding EntryCommand}"
-                    CommandParameter="{Binding ElementName=Password, Path=Password}"/>
+                    CommandParameter="{Binding ElementName=Password}"/>
         </StackPanel>
         <TextBlock Style="{StaticResource AuthorTemplate}"/>
     </Grid>

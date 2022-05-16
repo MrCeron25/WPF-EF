@@ -55,6 +55,7 @@
                        Style="{StaticResource TextBlockTemplate}"
                        FontSize="20"/>
             <ComboBox x:Name="Sex"
+                      HorizontalContentAlignment="Center"
                       Style="{StaticResource ComboBoxTemplate}">
                 <ComboBoxItem IsSelected="True" 
                               Content="{Binding MaleText}"/>
@@ -101,6 +102,7 @@
                        Style="{StaticResource TextBlockTemplate}"
                        FontSize="20"/>
             <PasswordBox x:Name="Password"
+                         TextBlock.TextAlignment="Center"
                          Style="{StaticResource PasswordBoxTemplate}"
                          Password="2DI804ajdoiLI!"/>
         </StackPanel>
@@ -122,7 +124,7 @@
                     Command="{Binding RegistrationCommand}">
                 <Button.CommandParameter>
                     <MultiBinding Converter="{StaticResource Converter}">
-                        <Binding Path="Password" ElementName="Password"/>
+                        <Binding ElementName="Password"/>
                         <Binding Path="SelectedItem.Content" ElementName="Sex"/>
                     </MultiBinding>
                 </Button.CommandParameter>

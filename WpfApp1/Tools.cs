@@ -19,7 +19,7 @@ namespace WpfApp1
             return bools.All(it => it);
         }
 
-        public static TData BinarySearch<TData>(List<TData> data, string key, int left, int right, Func<TData, string> func)
+        public static T BinarySearch<T>(List<T> data, string key, int left, int right, Func<T, string> func)
         {
             int mid = left + ((right - left) / 2);
             if (left >= right)
