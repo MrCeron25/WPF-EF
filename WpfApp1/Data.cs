@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Windows;
@@ -9,7 +10,6 @@ namespace WpfApp1
 {
     public class CountriesWithCities
     {
-
         public long CountryId { get; set; }
         public string CountryName { get; set; }
         public string CityName { get; set; }
@@ -110,14 +110,14 @@ namespace WpfApp1
             }
         }
 
-        public static List<Flight> GetFlights(string FromCity,
+        public static ObservableCollection<Flight> GetFlights(string FromCity,
                                               string ToCity,
                                               DateTime StartDate,
                                               DateTime EndDate)
         {
             try
             {
-                List<Flight> data = (
+                return new ObservableCollection<Flight>(
                     from fl in Manager.Instance.Context.flights
                     join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
                     where (from city in Manager.Instance.Context.cities
@@ -152,8 +152,7 @@ namespace WpfApp1
                                                               select ti).Count(),
                         Price = fl.price,
                     }
-                ).ToList();
-                return data;
+                );
             }
             catch (Exception error)
             {
@@ -162,13 +161,13 @@ namespace WpfApp1
             }
         }
 
-        public static List<Flight> GetFlights(string FromCity,
+        public static ObservableCollection<Flight> GetFlights(string FromCity,
                                               string ToCity,
                                               DateTime StartDate)
         {
             try
             {
-                List<Flight> data = (
+                return new ObservableCollection<Flight>(
                     from fl in Manager.Instance.Context.flights
                     join air in Manager.Instance.Context.airplane on fl.airplane_id equals air.id
                     where (from city in Manager.Instance.Context.cities
@@ -202,8 +201,7 @@ namespace WpfApp1
                                                               select ti).Count(),
                         Price = fl.price,
                     }
-                ).ToList();
-                return data;
+                );
             }
             catch (Exception error)
             {

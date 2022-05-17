@@ -17,7 +17,7 @@
 
     <Grid Background="#11999E">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/> 
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1.5*"/>
@@ -37,8 +37,7 @@
                        FontSize="15"
                        Foreground="White"
                        Style="{StaticResource TextBlockTemplate}"/>
-            <TextBox x:Name="DepartureCity"
-                     Text="{Binding DepartureCity}"
+            <TextBox Text="{Binding DepartureCity}"
                      Style="{StaticResource TextBoxTemplate}"
                      Foreground="Black"
                      Margin="0,0,0,0"/>
@@ -60,8 +59,7 @@
                        FontSize="15"
                        Foreground="White"
                        Style="{StaticResource TextBlockTemplate}"/>
-            <TextBox x:Name="ArrivalCity"
-                     Text="{Binding ArrivalCity}"
+            <TextBox Text="{Binding ArrivalCity}"
                      Style="{StaticResource TextBoxTemplate}"
                      Foreground="Black"
                      Margin="0,0,0,0"/>
@@ -76,7 +74,6 @@
                        Style="{StaticResource TextBlockTemplate}"/>
             <DatePicker DisplayDateStart="{Binding StartDateDisplayDateStart}" 
                         SelectedDate="{Binding StartDate}"
-                        x:Name="start"
                         FontSize="16"/>
         </StackPanel>
 
@@ -87,35 +84,33 @@
                        FontSize="15"
                        Foreground="White"
                        Style="{StaticResource TextBlockTemplate}"/>
-            <DatePicker x:Name="end"
-                        SelectedDate="{Binding EndDate}"
+            <DatePicker SelectedDate="{Binding EndDate}"
                         DisplayDateStart="{Binding StartDate}"
                         FontSize="16"/>
         </StackPanel>
 
-        <Button Content="Найти"
+        <Button Content="{Binding SearchText}"
                 Grid.Column="5"
                 Grid.Row="0"
-                Margin="10,10,10,10"
-                FontSize="20"
+                Style="{StaticResource ButtonTemplate}"
+                Height="auto"
                 Name="Search"
-                Click="Search_Click"/>
+                Command="{Binding SearchTicketsCommand}"/> 
 
-        <Button Content="Просмотр"
+        <Button Content="{Binding ViewingText}"
                 Grid.Column="6"
                 Grid.Row="0"
-                IsEnabled="False"
-                Margin="10,10,10,10"
-                FontSize="20"
-                Name="Viewing"
-                Click="Viewing_Click"/>
+                IsEnabled="{Binding ViewingIsEnabled}"
+                Style="{StaticResource ButtonTemplate}"
+                Height="auto"
+                Command="{Binding ViewingTicketCommand}"/>
 
         <ListView Grid.Row="1"
                   Margin="10,10,10,10"
-                  x:Name="Tickets"
-                  Grid.ColumnSpan="7" 
+                  Grid.ColumnSpan="7"
                   SelectionMode="Single"
-                  SelectionChanged="Tickets_SelectionChanged">
+                  ItemsSource="{Binding Tickets}"
+                  SelectedItem="{Binding SelectedTicket}"> 
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding FlightId}" Header="№ рейса"/>
