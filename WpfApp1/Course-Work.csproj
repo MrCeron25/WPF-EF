@@ -86,25 +86,59 @@
     <Compile Include="AdminMenuPage.xaml.cs">
       <DependentUpon>AdminMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\airplane.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="AirplanesPage.xaml.cs">
       <DependentUpon>AirplanesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AirplaneWindow.xaml.cs">
       <DependentUpon>AirplaneWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\airplane.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cities.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\country.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\flights.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\system.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tickets.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\users.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BuyingTicketsViewModel.cs" />
     <Compile Include="ViewModels\UserMenuViewModel.cs" />
+    <Compile Include="ViewModels\UserTicketsViewModel.cs" />
     <Compile Include="Views\Pages\BuyingTicketsPage.xaml.cs">
       <DependentUpon>BuyingTicketsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="BuyingWindow.xaml.cs">
       <DependentUpon>BuyingWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\cities.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="CitiesAndCountriesPage.xaml.cs">
       <DependentUpon>CitiesAndCountriesPage.xaml</DependentUpon>
@@ -112,16 +146,10 @@
     <Compile Include="CityWindow.xaml.cs">
       <DependentUpon>CityWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\country.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="CountryWindow.xaml.cs">
       <DependentUpon>CountryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="Models\flights.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="FlightsPage.xaml.cs">
       <DependentUpon>FlightsPage.xaml</DependentUpon>
     </Compile>
@@ -139,21 +167,6 @@
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs" />
-    <Compile Include="Models\ModelDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-    </Compile>
     <Compile Include="PassengerWindow.xaml.cs">
       <DependentUpon>PassengerWindow.xaml</DependentUpon>
     </Compile>
@@ -161,15 +174,6 @@
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Saver.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\system.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tickets.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\UserMenuPage.xaml.cs">
       <DependentUpon>UserMenuPage.xaml</DependentUpon>
     </Compile>
@@ -177,10 +181,7 @@
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="Models\users.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserTicketPage.xaml.cs">
+    <Compile Include="Views\Pages\UserTicketPage.xaml.cs">
       <DependentUpon>UserTicketPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Base\ViewModel.cs" />
@@ -263,7 +264,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserTicketPage.xaml">
+    <Page Include="Views\Pages\UserTicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,17 +314,19 @@
     <Resource Include="Views\Pages\reverse.jpg" />
     <Resource Include="Views\Pages\reg_icon.jpg" />
     <Resource Include="Views\Pages\login_airplane_icon.jpg" />
+    <Resource Include="Views\Windows\icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\ModelDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
       <DependentUpon>ModelDB.edmx</DependentUpon>
+      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ModelDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelDB.edmx</DependentUpon>
       <LastGenOutput>ModelDB.cs</LastGenOutput>
     </Content>
-    <Resource Include="Views\Windows\icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

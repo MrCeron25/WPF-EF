@@ -218,7 +218,7 @@ namespace WpfApp1.ViewModels
                     ObservableCollection<Flight> data;
                     if (EndDate == null)
                     {
-                        // пуста
+                        // пусто
                         data = Data.GetFlights(DepartureCity,
                                                ArrivalCity,
                                                (DateTime)StartDate);
@@ -266,7 +266,7 @@ namespace WpfApp1.ViewModels
                     tickets Newticket = new tickets
                     {
                         flight_id = long.Parse(window.FlightId.Text),
-                        seat_number = (long)window.NumberOfSeats.SelectedItem,
+                        seat_number = (int)window.NumberOfSeats.SelectedItem,
                         user_id = User.user_id
                     };
                     Manager.Instance.Context.tickets.Add(Newticket);

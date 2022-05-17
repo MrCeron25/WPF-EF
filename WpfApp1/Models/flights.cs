@@ -22,8 +22,8 @@ namespace WpfApp1.Models
     
         public long id { get; set; }
         public string flight_name { get; set; }
-        public Nullable<long> departure_city { get; set; }
-        public Nullable<long> arrival_city { get; set; }
+        public long departure_city { get; set; }
+        public long arrival_city { get; set; }
         public long airplane_id { get; set; }
         public System.DateTime departure_date { get; set; }
         public System.TimeSpan travel_time { get; set; }

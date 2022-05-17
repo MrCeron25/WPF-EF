@@ -13,10 +13,10 @@ namespace WpfApp1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class course_work_WPF_EFEntities1 : DbContext
+    public partial class course_work_WPF_EFEntities2 : DbContext
     {
-        public course_work_WPF_EFEntities1()
-            : base("name=course_work_WPF_EFEntities1")
+        public course_work_WPF_EFEntities2()
+            : base("name=course_work_WPF_EFEntities2")
         {
         }
     

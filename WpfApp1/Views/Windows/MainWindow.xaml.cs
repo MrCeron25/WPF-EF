@@ -8,7 +8,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            Manager.Instance.Context = new course_work_WPF_EFEntities1();
+            Manager.Instance.Context = new course_work_WPF_EFEntities2();
 
             Manager.Instance.MainFrame = MainFrame;
             Manager.Instance.MainFrame.Navigate(new LoginPage());

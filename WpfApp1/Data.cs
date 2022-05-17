@@ -8,6 +8,32 @@ using WpfApp1.Models;
 
 namespace WpfApp1
 {
+    public class Ticket
+    {
+        public long Id { get; set; }
+        public long FlightId { get; set; }
+        public long SeatNumber { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public string FlightName { get; set; }
+        public TimeSpan TravelTime { get; set; }
+        public double Price { get; set; }
+        public string DepartureCity { get; set; }
+        public string ArrivalCity { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+
+        public string GetTicketName()
+        {
+            return $@"{Id} {Surname} {Name} {FlightName}";
+        }
+
+        public string CreateTicket()
+        {
+            string res = $"Номер билета : {Id}\nРейс : {FlightName}\nМесто : {SeatNumber}\nГород вылета : {DepartureCity}\nГород прилёта : {ArrivalCity}\nФамилия : {Surname}\nИмя : {Name}\nВремя отправления : {DepartureDate}\nВремя прилёта : {ArrivalDate}\nВремя в пути : {TravelTime}\nЦена : {Price}";
+            return res;
+        }
+    }
     public class CountriesWithCities
     {
         public long CountryId { get; set; }
@@ -111,9 +137,9 @@ namespace WpfApp1
         }
 
         public static ObservableCollection<Flight> GetFlights(string FromCity,
-                                              string ToCity,
-                                              DateTime StartDate,
-                                              DateTime EndDate)
+                                                              string ToCity,
+                                                              DateTime StartDate,
+                                                              DateTime EndDate)
         {
             try
             {
@@ -162,8 +188,8 @@ namespace WpfApp1
         }
 
         public static ObservableCollection<Flight> GetFlights(string FromCity,
-                                              string ToCity,
-                                              DateTime StartDate)
+                                                              string ToCity,
+                                                              DateTime StartDate)
         {
             try
             {
@@ -210,11 +236,11 @@ namespace WpfApp1
             }
         }
 
-        public static List<Ticket> GetUserTickets(system SystemUser)
+        public static ObservableCollection<Ticket> GetUserTickets(system SystemUser)
         {
             try
             {
-                List<Ticket> data = (
+                return new ObservableCollection<Ticket>(
                     from ti in Manager.Instance.Context.tickets
                     join user in Manager.Instance.Context.users on ti.user_id equals user.id
                     join fl in Manager.Instance.Context.flights on ti.flight_id equals fl.id
@@ -240,8 +266,7 @@ namespace WpfApp1
                         Name = user.name,
                         Surname = user.surname
                     }
-                ).ToList();
-                return data;
+                );
             }
             catch (Exception error)
             {
@@ -390,7 +415,7 @@ namespace WpfApp1
             }
         }
 
-        private static IQueryable<long> GetOccupiedSeats(long FlightId)
+        private static List<int> GetOccupiedSeats(long FlightId)
         {
             try
             {
@@ -400,7 +425,7 @@ namespace WpfApp1
                     where fl.id == FlightId &&
                           fl.is_archive == false
                     select ti.seat_number
-                 );
+                 ).ToList();
             }
             catch (Exception error)
             {
@@ -412,15 +437,22 @@ namespace WpfApp1
         public static List<long> GetFreeSeats(long FlightId, long numberOfSeat)
         {
             var occupiedPlaces = GetOccupiedSeats(FlightId);
-            List<long> res = new List<long>();
-            for (long i = 1; i <= numberOfSeat; i++)
+            if (occupiedPlaces != null)
             {
-                if (!occupiedPlaces.Contains(i))
+                List<long> res = new List<long>();
+                for (int i = 1; i <= numberOfSeat; i++)
                 {
-                    res.Add(i);
+                    if (!occupiedPlaces.Contains(i))
+                    {
+                        res.Add(i);
+                    }
                 }
+                return res;
             }
-            return res;
+            else
+            {
+                return null;
+            }
         }
     }
 }
