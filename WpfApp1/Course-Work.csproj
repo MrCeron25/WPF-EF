@@ -96,6 +96,7 @@
       <DependentUpon>AirplaneWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BuyingTicketsViewModel.cs" />
+    <Compile Include="ViewModels\UserMenuViewModel.cs" />
     <Compile Include="Views\Pages\BuyingTicketsPage.xaml.cs">
       <DependentUpon>BuyingTicketsPage.xaml</DependentUpon>
     </Compile>
@@ -169,7 +170,7 @@
     <Compile Include="Models\tickets.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserMenuPage.xaml.cs">
+    <Compile Include="Views\Pages\UserMenuPage.xaml.cs">
       <DependentUpon>UserMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\RegistrationPage.xaml.cs">
@@ -254,7 +255,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserMenuPage.xaml">
+    <Page Include="Views\Pages\UserMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

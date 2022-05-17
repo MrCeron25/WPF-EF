@@ -1,0 +1,48 @@
+﻿<Page x:Class="WpfApp1.UserMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      xmlns:vm="clr-namespace:WpfApp1.ViewModels"
+      d:DesignWidth="800"
+      Title="UserMenuPage">
+
+    <Page.DataContext>
+        <vm:UserMenuViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="#30E3CA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <TextBlock Grid.Row="0"
+                       Style="{StaticResource TextBlockTemplate}"
+                       FontSize="18"
+                       Text="{Binding UserLoginTitle}"/>
+            <TextBlock FontSize="18"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource TextBlockTemplate}"
+                       Text="{Binding UserLogin}"/>
+        </StackPanel>
+        
+        <StackPanel VerticalAlignment="Bottom"
+                    Grid.Row="1">
+            <Button Content="{Binding BuyingTicketButtonName}"
+                    Style="{StaticResource ButtonTemplate}"
+                    Command="{Binding BuyingTicketsCommand}"/>
+
+            <Button Content="{Binding MyTicketsButtonName}" 
+                    Style="{StaticResource ButtonTemplate}"
+                    Command="{Binding MyTicketsCommand}"/>
+
+            <Button Content="{Binding ExitButtonName}" 
+                    Style="{StaticResource ButtonTemplate}"
+                    Command="{Binding ExitCommand}"/>
+        </StackPanel>
+    </Grid>
+</Page>
