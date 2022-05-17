@@ -87,7 +87,7 @@ drop table if exists tickets;
 create table tickets(
 	id bigint identity primary key,
 	[flight_id] bigint not null,
-	seat_number int not null,
+	seat_number bigint not null,
 	[user_id] bigint not null,
 	FOREIGN KEY ([flight_id]) REFERENCES flights (id),
 	FOREIGN KEY ([user_id]) REFERENCES users (id)

@@ -415,7 +415,7 @@ namespace WpfApp1
             }
         }
 
-        private static List<int> GetOccupiedSeats(long FlightId)
+        private static List<long> GetOccupiedSeats(long FlightId)
         {
             try
             {
@@ -440,7 +440,7 @@ namespace WpfApp1
             if (occupiedPlaces != null)
             {
                 List<long> res = new List<long>();
-                for (int i = 1; i <= numberOfSeat; i++)
+                for (long i = 1; i <= numberOfSeat; i++)
                 {
                     if (!occupiedPlaces.Contains(i))
                     {

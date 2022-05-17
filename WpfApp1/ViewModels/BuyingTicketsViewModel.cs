@@ -259,14 +259,14 @@ namespace WpfApp1.ViewModels
         private void OnViewingTicketCommandExecuted(object parameters)
         {
             BuyingWindow window = new BuyingWindow(SelectedTicket);
-            if ((bool)window.ShowDialog())
+            try
             {
-                try
+                if ((bool)window.ShowDialog())
                 {
                     tickets Newticket = new tickets
                     {
                         flight_id = long.Parse(window.FlightId.Text),
-                        seat_number = (int)window.NumberOfSeats.SelectedItem,
+                        seat_number = (long)window.NumberOfSeats.SelectedItem,
                         user_id = User.user_id
                     };
                     Manager.Instance.Context.tickets.Add(Newticket);
@@ -274,10 +274,10 @@ namespace WpfApp1.ViewModels
                     SearchTicketsCommand.Execute(null); // обновление данных
                     MessageBox.Show("Вы успешно купили билет.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
