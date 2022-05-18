@@ -29,7 +29,7 @@
                     MaxWidth="300">
             <TextBlock Text="{Binding LoginTitle}"
                        Style="{StaticResource TextBlockTemplate}"/>
-            <TextBlock Text="{Binding LoginName}" 
+            <TextBlock Text="{Binding LoginName}"
                        FontSize="20"
                        Style="{StaticResource TextBlockTemplate}"/>
             <TextBox Text="{Binding Login}" 

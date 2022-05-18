@@ -13,6 +13,7 @@
         Icon="icon.jpg"
         MinWidth="1000"
         WindowState="Maximized">
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>

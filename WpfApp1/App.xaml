@@ -18,25 +18,34 @@
 
         <Style x:Key="TextBoxTemplate" TargetType="TextBox">
             <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="Red"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="20,20,20,20"/>
         </Style>
 
+        <Style x:Key="CenteringBoldTextBoxTemplate" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style x:Key="CenteringTextBoxTemplate" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
         <Style x:Key="PasswordBoxTemplate" TargetType="PasswordBox">
-            <Setter Property="Foreground" Value="Red"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="20,20,20,20"/>
         </Style>
 
         <Style x:Key="DatePickerTemplate" TargetType="DatePicker">
-            <Setter Property="Foreground" Value="Red"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="20,20,20,20"/>
         </Style>
 
         <Style x:Key="ComboBoxTemplate" TargetType="ComboBox">
-            <Setter Property="Foreground" Value="Red"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="20,20,20,20"/>
         </Style>

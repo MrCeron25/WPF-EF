@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="reg_icon.jpg" 
+            <ImageBrush ImageSource="sky.jpg" 
                         Stretch="Fill"/>
         </Grid.Background>
 
