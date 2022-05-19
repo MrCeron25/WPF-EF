@@ -1,11 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace WpfApp1
 {
     public partial class BuyingWindow : Window
     {
-
         public BuyingWindow(Flight flight)
         {
             InitializeComponent();
@@ -19,11 +17,6 @@ namespace WpfApp1
             Price.Text = flight.Price.ToString();
             NumberOfSeats.ItemsSource = Data.GetFreeSeats(flight.FlightId, flight.NumberOfSeat);
         }
-
-        //private void NumberOfSeats_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Buy.IsEnabled = NumberOfSeats.SelectedItem != null;
-        //}
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {

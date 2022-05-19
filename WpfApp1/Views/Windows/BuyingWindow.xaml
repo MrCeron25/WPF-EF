@@ -86,6 +86,8 @@
                        Style="{StaticResource CenteringBoldTextBoxTemplate}"/>
             <ComboBox x:Name="NumberOfSeats"
                       Margin="10,10,10,10"
+                      SelectedItem="{Binding SelectedSeatNumber}"
+                      ItemsSource="{Binding SeatNumbers}"
                       FontSize="20"
                       VirtualizingStackPanel.VirtualizationMode="Recycling"
                       VirtualizingStackPanel.IsVirtualizing="True"/>
@@ -97,15 +99,12 @@
                        Style="{StaticResource CenteringTextBoxTemplate}"/>
         </StackPanel>
 
-
-        <Button Margin="10,10,10,10"
-                Grid.Column="1"
+        <Button Grid.Column="1"
                 Grid.Row="1"
-                x:Name="Buy"
-                Content="Купить" 
-                FontSize="20"
-                IsEnabled="False"
+                Name="Buy"
+                Style="{StaticResource ButtonTemplate}"
+                Content="{Binding BuyButtonName}"
+                IsEnabled="{Binding BuyIsEnabled}"
                 Click="Buy_Click"/>
-
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using WpfApp1.ViewModels.Base;
 using WpfApp1.Infrastructure.Commands;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace WpfApp1.ViewModels
 {
@@ -210,48 +211,61 @@ namespace WpfApp1.ViewModels
 
         #endregion
 
-        #region Команды
+        #region Номера мест
 
-        public ICommand CloseApplicationCommand { get; }
-
-        private bool CanCloseApplicationCommandExecute(object parameters) => true;
-
-        private void OnCloseApplicationCommandExecuted(object parameters)
+        private ObservableCollection<long> _SeatNumbers;
+        public ObservableCollection<long> SeatNumbers
         {
-            Application.Current.Shutdown();
-        }
-
-
-
-        public ICommand EntryCommand { get; }
-
-        private bool CanEntryCommandExecute(object parameters) => true;
-
-        private void OnEntryCommandExecuted(object parameters)
-        {
-            Manager.Instance.MainFrame.Navigate(new LoginPage());
-        }
-
-
-
-        public ICommand RegistrationCommand { get; }
-
-        private bool CanRegistrationCommandExecute(object p) => true;
-
-        private void OnRegistrationCommandExecuted(object p)
-        {
-            Manager.Instance.MainFrame.Navigate(new RegistrationPage());
+            get => _SeatNumbers;
+            set => Set(ref _SeatNumbers, value);
         }
 
         #endregion
 
-        #region Конструктор
+        #region Выбранное место
 
-        public BuyingWindowViewModel()
+        private long? _SelectedSeatNumber;
+        public long? SelectedSeatNumber
         {
-            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-            EntryCommand = new LambdaCommand(OnEntryCommandExecuted, CanEntryCommandExecute);
-            RegistrationCommand = new LambdaCommand(OnRegistrationCommandExecuted, CanRegistrationCommandExecute);
+            get => _SelectedSeatNumber;
+            set
+            {
+                Set(ref _SelectedSeatNumber, value);
+                BuyIsEnabled = _SelectedSeatNumber != null;
+            }
+        }
+
+        #endregion
+
+        #region Покупка билета
+
+        private bool _BuyIsEnabled = false;
+        public bool BuyIsEnabled
+        {
+            get => _BuyIsEnabled;
+            set => Set(ref _BuyIsEnabled, value);
+        }
+
+        #endregion
+
+        #region Название кнопки
+
+        private string _BuyButtonName = "Купить";
+        public string BuyButtonName
+        {
+            get => _BuyButtonName;
+            set => Set(ref _BuyButtonName, value);
+        }
+
+        #endregion
+
+        #region Название кнопки
+
+        private bool? _DialogResult = true;
+        public bool? DialogResult
+        {
+            get => _DialogResult;
+            set => Set(ref _DialogResult, value);
         }
 
         #endregion
